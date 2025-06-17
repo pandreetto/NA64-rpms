@@ -1,0 +1,3 @@
+export G4VERSION=@VERSION@
+export GEANT4_DATA_DIR="/usr/share/Geant4/data"
+

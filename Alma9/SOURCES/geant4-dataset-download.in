@@ -1,0 +1,80 @@
+#!/usr/bin/python3
+
+import sys
+import os
+import os.path
+import getopt
+import subprocess
+
+def help():
+    sys.stdout.write("Usage: geant4-dataset-download [--help|-h] [--force|-f]\n")
+
+def main():
+
+    datasets =  [
+        ("G4NDL.4.7.1", "G4NDL4.7.1"),
+        ("G4EMLOW.8.6.1", "G4EMLOW8.6.1"),
+        ("G4PhotonEvaporation.6.1", "PhotonEvaporation6.1"),
+        ("G4RadioactiveDecay.6.1.2", "RadioactiveDecay6.1.2"),
+        ("G4PARTICLEXS.4.1", "G4PARTICLEXS4.1"),
+        ("G4PII.1.3", "G4PII1.3"),
+        ("G4RealSurface.2.2", "RealSurface2.2"),
+        ("G4SAIDDATA.2.0", "G4SAIDDATA2.0"),
+        ("G4ABLA.3.3", "G4ABLA3.3"),
+        ("G4INCL.1.2", "G4INCL1.2"),
+        ("G4ENSDFSTATE.3.0", "G4ENSDFSTATE3.0"),
+        ("G4CHANNELING.1.0", "G4CHANNELING1.0"),
+        ("G4TENDL.1.4", "G4TENDL1.4"),
+        ("G4NUDEXLIB.1.0", "G4NUDEXLIB1.0"),
+        ("G4URRPT.1.1", "G4URRPT1.1")
+    ]
+
+    datadir = "/usr/share/Geant4/data"
+    tmpdir = "/tmp/Geant4-datasets"
+    dataurl = "https://cern.ch/geant4-data/datasets"
+
+    try:
+        opts, args = getopt.getopt(sys.argv[1:], "hf", ["help", "force"])
+    except getopt.GetoptError:
+        help()
+        sys.exit(1)
+
+    force_download = False
+    for opt_name, opt_arg in opts:
+        if opt_name in ("-f", "--force"):
+            force_download = True
+        if opt_name in ("-h", "--help"):
+            help()
+            sys.exit(0)
+
+    try:
+        if not os.path.exists(datadir):
+            os.makedirs(datadir)
+        if os.path.exists(tmpdir):
+            subprocess.call("rm -rf %s" % tmpdir, shell=True)
+        os.makedirs(tmpdir)
+
+        for dset in datasets:
+            if os.path.exists('%s/%s' % (datadir, dset[1])):
+                if force_download:
+                    subprocess.call("rm -rf %s/%s" % (datadir, dset[1]), shell=True)
+                else:
+                    sys.stdout.write("Dataset %s is ok\n" % dset[1])
+                    continue
+
+            tarball = "%s/%s.tar.gz" % (tmpdir, dset[1])
+            d_url = "%s/%s.tar.gz" % (dataurl, dset[0])
+            subprocess.call("wget -O %s %s" % (tarball, d_url), shell=True)
+            subprocess.call("tar -C %s -zxf %s" % (datadir, tarball), shell=True)
+
+    finally:
+        if os.path.exists(tmpdir):
+            subprocess.call("rm -rf %s" % tmpdir, shell=True)
+
+
+if __name__ == "__main__":
+    main()
+
+
+
+

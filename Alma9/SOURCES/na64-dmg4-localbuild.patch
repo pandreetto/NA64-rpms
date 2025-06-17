@@ -1,0 +1,20 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index c2e13a0..216d88a 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -37,7 +37,6 @@ else()
+   find_package(Geant4 REQUIRED)
+ endif()
+ 
+-list(APPEND CMAKE_MODULE_PATH /afs/cern.ch/sw/lcg/external/cmaketools/1.1/modules)
+ list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/modules_cmake_standalone)
+ 
+ #----------------------------------------------------------------------------
+@@ -78,5 +77,5 @@ if(APPLE)
+ endif(APPLE)
+ 
+ #---Install build products---------------------------------------------------
+-install(TARGETS DMG4 DarkMatter UtilsDM DESTINATION lib)
++install(TARGETS DMG4 DarkMatter UtilsDM DESTINATION lib64)
+ install(DIRECTORY include/ DESTINATION include FILES_MATCHING PATTERN *.hh PATTERN .svn EXCLUDE)
+

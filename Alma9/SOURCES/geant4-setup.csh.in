@@ -1,0 +1,3 @@
+setenv G4VERSION @VERSION@
+setenv GEANT4_DATA_DIR "/usr/share/Geant4/data"
+

@@ -1,0 +1,10 @@
+--- source/processes/hadronic/util/src/G4HadronicDeveloperParameters.cc	2024-12-05 16:16:16.000000000 +0100
++++ /home/paandree/Projects/NA64/na64-simulation-master/geant4/simulation/Geant4Patches/11.03/G4HadronicDeveloperParameters.cc	2025-06-02 12:31:56.000000000 +0200
+@@ -335,5 +335,6 @@
+    G4String text("Parameter ");
+    text += name;  
+    text += " has changed from default value.";
+-   G4Exception( "G4HadronicDeveloperParameters" , "HadDevPara_005", JustWarning , text );
++   IWarnCounter++;
++   if(IWarnCounter < 2) G4Exception( "G4HadronicDeveloperParameters" , "HadDevPara_005", JustWarning , text );
+ }

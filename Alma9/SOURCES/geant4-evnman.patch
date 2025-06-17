@@ -1,0 +1,17 @@
+--- source/event/include/G4EventManager.hh	2024-12-05 16:16:16.000000000 +0100
++++ /home/paandree/Projects/NA64/na64-simulation-master/geant4/simulation/Geant4Patches/11.03/G4EventManager.hh	2025-06-02 12:31:56.000000000 +0200
+@@ -208,6 +208,14 @@
+     G4String randomNumberStatusToG4Event;
+ 
+     G4StateManager* stateManager = nullptr;
++
++//-------------------------------------- E D I T E D ----------------------------------------------
++
++ public:
++
++   inline void RunStackTracks(G4TrackVector *trackVector, G4bool IDhasAlreadySet=false)
++   {StackTracks(trackVector); }
++
+ };
+ 
+ #endif

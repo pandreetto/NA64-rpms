@@ -1,0 +1,87 @@
+#----------------------------------------------------------------------------
+# Setup the project
+#
+cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
+project(NA64geant4lib)
+
+list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/modules_cmake_standalone)
+
+#----------------------------------------------------------------------------
+# Find Geant4 package, activating all available UI and Vis drivers by default
+# You can set WITH_GEANT4_UIVIS to OFF via the command line or ccmake/cmake-gui
+# to build a batch mode only executable
+#
+option(WITH_GEANT4_UIVIS "Build example with Geant4 UI and Vis drivers" OFF)
+if(WITH_GEANT4_UIVIS)
+  find_package(Geant4 REQUIRED ui_all vis_all)
+else()
+  find_package(Geant4 REQUIRED)
+endif()
+
+
+#----------------------------------------------------------------------------
+# Find DMG4, GSL and ROOT
+#
+set(DMG4_INCLUDE_DIR NOTFOUND)
+find_package(DMG4)
+
+set(GSL_INCLUDE_DIR NOTFOUND)
+find_package(GSL)
+
+find_package(ROOT CONFIG REQUIRED)
+include(${ROOT_USE_FILE})
+
+#----------------------------------------------------------------------------
+# Setup Geant4 include directories and compile definitions
+# Setup include directory for this project
+#
+include(${Geant4_USE_FILE})
+
+include_directories(${PROJECT_SOURCE_DIR}/include
+                    ${PROJECT_SOURCE_DIR}/include/HistRoot)
+
+include_directories(${DMG4_INCLUDE_DIRS} ${GSL_INCLUDE_DIR})
+
+
+#----------------------------------------------------------------------------
+# Locate sources and headers for this project
+file(GLOB sources_Core ${PROJECT_SOURCE_DIR}/src/Core/*.cc)
+file(GLOB sources_DarkMatter ${PROJECT_SOURCE_DIR}/src/DarkMatter/*.cc)
+file(GLOB sources_GDML ${PROJECT_SOURCE_DIR}/src/GDML/*.cc)
+file(GLOB sources_G4Utils ${PROJECT_SOURCE_DIR}/src/G4Utils/*.cc)
+file(GLOB sources_HistRoot ${PROJECT_SOURCE_DIR}/src/HistRoot/*.cc)
+file(GLOB sources_Utils ${PROJECT_SOURCE_DIR}/src/Utils/*.cc)
+
+add_library(NA64Utils SHARED ${sources_Utils})
+set_target_properties(NA64Utils PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/src)
+
+add_library(NA64HistRoot SHARED ${sources_HistRoot})
+target_link_libraries(NA64HistRoot ${ROOT_LIBRARIES})
+set_target_properties(NA64HistRoot PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/src)
+
+add_library(NA64geant4Utils SHARED ${sources_G4Utils})
+target_link_libraries(NA64geant4Utils ${Geant4_LIBRARIES} ${ROOT_LIBRARIES})
+set_target_properties(NA64geant4Utils PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/src)
+
+add_library(NA64geant4Core SHARED ${sources_Core})
+target_link_libraries(NA64geant4Core ${Geant4_LIBRARIES} NA64Utils NA64HistRoot NA64geant4Utils)
+set_target_properties(NA64geant4Core PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/src)
+
+add_library(NA64geant4DarkMatter SHARED ${sources_DarkMatter})
+target_link_libraries(NA64geant4DarkMatter ${Geant4_LIBRARIES} NA64geant4Core ${DMG4_LIBRARIES} ${GSL_LIBRARIES} NA64Utils NA64HistRoot NA64geant4Utils)
+set_target_properties(NA64geant4DarkMatter PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/src)
+
+add_library(NA64geant4GDML SHARED ${sources_GDML})
+target_link_libraries(NA64geant4GDML ${Geant4_LIBRARIES} NA64HistRoot)
+set_target_properties(NA64geant4GDML PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/src)
+
+
+#---Install build products---------------------------------------------------
+
+install(TARGETS NA64geant4Core NA64geant4GDML NA64Utils NA64geant4Utils DESTINATION lib64)
+
+install(TARGETS NA64geant4DarkMatter DESTINATION lib64)
+
+install(TARGETS NA64HistRoot DESTINATION lib64)
+
+install(DIRECTORY include/ DESTINATION include FILES_MATCHING PATTERN *.hh PATTERN .svn EXCLUDE)
