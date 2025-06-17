@@ -9,6 +9,8 @@
 %global _sbuilddir %{_builddir}/%{name}-%{version}/simulation
 %global _cbuilddir %{_builddir}/%{name}-%{version}/build
 
+%global cmake_na64g4_dir %{_libdir}/cmake/NA64geant4
+
 Summary: Simulation library for NA64 project
 Name: na64-geant4-lib
 Version: %{_pver}
@@ -26,6 +28,9 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 AutoReqProv: yes
 Source0: https://nexus.pd.infn.it/artifacts/repository/misc/na64-geant4-lib-%{version}.tar.gz
 Source1: na64-geant4-lib-CMakeLists.txt
+Source2: na64-geant4-lib-git-version.cc
+Source3: NA64geant4Config.cmake
+Source4: NA64geant4ConfigVersion.cmake.in
 
 %description
 Simulation library for NA64 project
@@ -35,6 +40,7 @@ Simulation library for NA64 project
 rm -rf %{buildroot}
 mkdir -p %{buildroot}
 cp %{SOURCE1} %{_sbuilddir}/CMakeLists.txt
+cp %{SOURCE2} %{_sbuilddir}/src/Utils/git_version.cc
 
 %build
 mkdir %{_cbuilddir}
@@ -49,6 +55,11 @@ make %{?_smp_mflags}
 %install
 cd %{_cbuilddir}
 make install
+
+mkdir -p %{buildroot}%{cmake_na64g4_dir}
+cp %{SOURCE3} %{buildroot}%{cmake_na64g4_dir}
+# TODO missing versioning
+cp %{SOURCE4} %{buildroot}%{cmake_na64g4_dir}/NA64geant4ConfigVersion.cmake
 
 %clean
 rm -rf %{buildroot}
@@ -73,4 +84,6 @@ Simulation library for NA64 project (development files).
 %{_includedir}/*.hh
 %dir %{_includedir}/HistRoot
 %{_includedir}/HistRoot/*.hh
+%dir %{cmake_na64g4_dir}
+%{cmake_na64g4_dir}/*.cmake
 
