@@ -82,6 +82,7 @@ Simulation library for NA64 project (development files).
 %files devel
 %defattr(-,root,root)
 %{_includedir}/*.hh
+%{_includedir}/*.inc
 %dir %{_includedir}/HistRoot
 %{_includedir}/HistRoot/*.hh
 %dir %{cmake_na64g4_dir}

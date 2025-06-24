@@ -84,4 +84,6 @@ install(TARGETS NA64geant4DarkMatter DESTINATION lib64)
 
 install(TARGETS NA64HistRoot DESTINATION lib64)
 
-install(DIRECTORY include/ DESTINATION include FILES_MATCHING PATTERN *.hh PATTERN .svn EXCLUDE)
+install(DIRECTORY include/
+        DESTINATION include
+        FILES_MATCHING PATTERN *.hh PATTERN *.inc PATTERN .svn EXCLUDE)
