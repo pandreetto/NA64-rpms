@@ -88,3 +88,7 @@ Simulation library for NA64 project (development files).
 %dir %{cmake_na64g4_dir}
 %{cmake_na64g4_dir}/*.cmake
 
+%changelog
+* Fri Oct 17 2025 Paolo Andreetto <paolo.andreetto@pd.infn.it> - 1.0.0-1
+- First release for AlmaLinux
+
