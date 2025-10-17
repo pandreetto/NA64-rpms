@@ -1,12 +1,10 @@
 %global debug_package %{nil}
 %undefine _disable_source_fetch
 
-#
-# This is a temporary package, git reference 410c425e0a8fb0b953b52d00103f77474069c972
-#
 %global _pver 2.6.0
+%global _tagver d288b878ade6e651ee38e357035a04382488f29b
 
-%global _sbuilddir %{_builddir}/%{name}-%{version}/DMG4-%{version}
+%global _sbuilddir %{_builddir}/%{name}-%{version}/DMG4-%{_tagver}
 %global _cbuilddir %{_builddir}/%{name}-%{version}/build
 
 Summary: Simulation of Dark Matter production in the electron, positron and muon beams
@@ -24,7 +22,7 @@ BuildRequires: geant4-devel
 BuildRequires: gsl-devel
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 AutoReqProv: yes
-Source0: https://nexus.pd.infn.it/artifacts/repository/misc/na64-dmg4-%{version}.tar.gz
+Source0: https://gitlab.cern.ch/P348/DMG4/-/archive/%{_tagver}/DMG4-%{_tagver}.zip
 Patch0: na64-dmg4-localbuild.patch
 
 %description
@@ -78,4 +76,8 @@ Simulation of Dark Matter production in the electron, positron and muon beams (d
 %{_includedir}/DMG4/DMProcesses/*.hh
 %dir %{_includedir}/UtilsDM
 %{_includedir}/UtilsDM/*.hh
+
+%changelog
+* Fri Oct 17 2025 Paolo Andreetto <paolo.andreetto@pd.infn.it> - 2.6.0-1
+- First release for AlmaLinux
 
