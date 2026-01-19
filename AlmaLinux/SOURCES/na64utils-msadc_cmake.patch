@@ -1,0 +1,26 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index ee98557..b60a89a 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -7,7 +7,10 @@ cmake_minimum_required( VERSION 3.23 )
+ # ___________________________________________________/ General Project Features
+ # Set (current) version info
+ include (cmake/version.cmake)
+-get_pkg_version (LIBNA64UTIL)
++
++set( LIBNA64UTIL_VERSION_MAJOR 2 )
++set( LIBNA64UTIL_VERSION_MINOR 15 )
++set(LIBNA64UTIL_VERSION_TWEAK 1 )
+ 
+ set( LIBNA64UTIL_VERSION ${LIBNA64UTIL_VERSION_MAJOR}.${LIBNA64UTIL_VERSION_MINOR}.${LIBNA64UTIL_VERSION_TWEAK} )
+ project(na64util VERSION "${LIBNA64UTIL_VERSION}")
+@@ -193,7 +196,7 @@ file( GLOB_RECURSE libna64util_HEADERS
+ 
+ # Add library target
+ set(na64util_LIB ${CMAKE_PROJECT_NAME})
+-add_library(${na64util_LIB} ${libna64util_SOURCES})
++add_library(${na64util_LIB} SHARED ${libna64util_SOURCES})
+ # Set library's properties
+ target_include_directories (${na64util_LIB}
+     PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/include>
+

@@ -1,0 +1,24 @@
+ddiff --git a/CMakeLists.txt b/CMakeLists.txt
+index 74af7e1..3e9d1df 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -17,8 +17,7 @@
+ cmake_minimum_required (VERSION 3.9)
+ 
+ include (cmake/version.cmake)
+-get_pkg_version (SDC)
+-set (SDC_VERSION ${SDC_VERSION_MAJOR}.${SDC_VERSION_MINOR}.${SDC_VERSION_TWEAK})
++set (SDC_VERSION 0.5.0)
+ 
+ #
+ # General Project Features
+@@ -103,7 +102,7 @@ if(SQLite3_FOUND)
+     list(APPEND sdc_SOURCES src/sdc-sqlite3.cc src/sdc-db.c src/sdc-sql.cc)
+ endif(SQLite3_FOUND)
+ 
+-add_library (${sdc_LIB} ${sdc_SOURCES})
++add_library (${sdc_LIB} SHARED ${sdc_SOURCES})
+ target_include_directories (${sdc_LIB}
+     PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/include>
+     PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+
