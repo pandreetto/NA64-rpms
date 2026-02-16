@@ -1,0 +1,15 @@
+diff --git a/date/monitoring/GNUmakefile b/date/monitoring/GNUmakefile
+index 42c45ad6..9dc04d6d 100644
+--- a/date/monitoring/GNUmakefile
++++ b/date/monitoring/GNUmakefile
+@@ -222,8 +222,7 @@ ${BINS_DIR}/libmonitor.so : \
+     ${BINS_DIR}/eventHandler.o        \
+     ${BINS_DIR}/fileHandler.o \
+     ${BINS_DIR}/mpDaemon.o            \
+-    ${BINS_DIR}/libInfoBundle.o             \
+-    ${BINS_DIR}/monitorDict.o
++    ${BINS_DIR}/libInfoBundle.o
+ ifeq (${ROOTSYS},)
+        @ echo "*** ROOT not available ***"
+ else
+
