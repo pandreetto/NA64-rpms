@@ -8,7 +8,7 @@
 %global _cbuilddir %{_builddir}/%{name}-%{version}/build
 
 Summary: Hierarchical data query language
-Name: hdqlang
+Name: crankone-hdql
 Version: %{_pver}
 Release: 1.na64%{?dist}
 License: GPL v.3
@@ -24,8 +24,8 @@ BuildRequires: flex
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 AutoReqProv: yes
 Source0: https://github.com/CrankOne/hdql/archive/%{_tagver}.zip
-Source1: hdqlang_hdqlConfig.cmake
-Patch0: hdqlang_CMakeLists.patch
+Source1: crankone-hdql_hdqlConfig.cmake
+Patch0: crankone-hdq_CMakeLists.patch
 
 %description
 HDQLang is domain-specific language designed to be embeddable and reasonably
@@ -54,6 +54,8 @@ cd %{_cbuilddir}
 make install
 chrpath --delete %{buildroot}%{_libdir}/*.so.*
 cp %{SOURCE1} %{buildroot}%{_libdir}/cmake/hdql/hdqlConfig.cmake
+sed -i -e 's|%{buildroot}%{_prefix}|%{_prefix}|g' \
+          %{buildroot}%{_libdir}/cmake/hdql/hdqlTargets-relwithdebinfo.cmake
 
 %clean
 rm -rf %{buildroot}
