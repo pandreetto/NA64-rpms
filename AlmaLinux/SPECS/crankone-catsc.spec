@@ -50,6 +50,7 @@ make install
 
 mv %{buildroot}%{_prefix}/lib %{buildroot}%{_libdir}
 sed -i -e 's|%{buildroot}/usr|%{_prefix}|g' %{buildroot}%{_libdir}/pkgconfig/catsc.pc
+sed -i -e 's|lib/libcatsc|lib64/libcatsc|g' %{buildroot}%{_libdir}/cmake/catsc/catscTargets-relwithdebinfo.cmake
 
 %clean
 rm -rf %{buildroot}
