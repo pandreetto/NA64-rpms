@@ -1,0 +1,49 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 7298527..fcac9c1 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -6,8 +6,9 @@ cmake_minimum_required (VERSION 3.9.4)
+ #  - exports install configuration
+ #  - packaging via CPack
+ 
+-include (cmake/version.cmake)
+-get_pkg_version (hdql)
++set (hdql_VERSION_MAJOR 0)
++set (hdql_VERSION_MINOR 2)
++set (hdql_VERSION_TWEAK 1)
+ set (hdql_VERSION ${hdql_VERSION_MAJOR}.${hdql_VERSION_MINOR}.${hdql_VERSION_TWEAK})
+ 
+ project (hdql VERSION ${hdql_VERSION})
+@@ -92,7 +93,7 @@ list (APPEND hdql_SOURCES
+ 
+ set (CMAKE_DEBUG_POSTFIX .dbg)
+ 
+-add_library (hdql ${hdql_SOURCES})
++add_library (hdql SHARED ${hdql_SOURCES})
+ target_include_directories (hdql
+     PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/include>
+     PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+@@ -194,12 +195,12 @@ add_custom_target (uninstall
+ # CMake config export
+ install (EXPORT ${CMAKE_PROJECT_NAME}Targets
+     FILE ${CMAKE_PROJECT_NAME}Targets.cmake
+-    DESTINATION lib/cmake/${CMAKE_PROJECT_NAME}
++    DESTINATION lib64/cmake/${CMAKE_PROJECT_NAME}
+     )
+ include (CMakePackageConfigHelpers)
+ configure_package_config_file (${CMAKE_CURRENT_SOURCE_DIR}/Config.cmake.in
+     "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_PROJECT_NAME}Config.cmake"
+-    INSTALL_DESTINATION "lib/cmake/${CMAKE_PROJECT_NAME}"
++    INSTALL_DESTINATION "lib64/cmake/${CMAKE_PROJECT_NAME}"
+     NO_SET_AND_CHECK_MACRO
+     NO_CHECK_REQUIRED_COMPONENTS_MACRO
+     )
+@@ -211,7 +212,7 @@ write_basic_package_version_file (
+ install (FILES
+     ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_PROJECT_NAME}Config.cmake
+     ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_PROJECT_NAME}ConfigVersion.cmake
+-    DESTINATION lib/cmake/${CMAKE_PROJECT_NAME}
++    DESTINATION lib64/cmake/${CMAKE_PROJECT_NAME}
+     )
+ # Permits using hdql from build dir (without installing)
+ export(EXPORT ${CMAKE_PROJECT_NAME}Targets
