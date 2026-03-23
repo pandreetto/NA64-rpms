@@ -25,7 +25,7 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 AutoReqProv: yes
 Source0: https://github.com/CrankOne/hdql/archive/%{_tagver}.zip
 Source1: crankone-hdql_hdqlConfig.cmake
-Patch0: crankone-hdq_CMakeLists.patch
+Patch0: crankone-hdql_CMakeLists.patch
 
 %description
 HDQLang is domain-specific language designed to be embeddable and reasonably
