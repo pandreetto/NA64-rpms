@@ -19,6 +19,7 @@ BuildArch: %{_arch}
 BuildRequires: cmake
 BuildRequires: make
 BuildRequires: na64-date-monitoring-devel
+BuildRequires: expat-devel
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 AutoReqProv: yes
 Source0: https://gitlab.cern.ch/P348/p348-daq/-/archive/%{_tagver}/p348-daq-%{_tagver}.zip
@@ -53,6 +54,9 @@ cp %{SOURCE2} %{buildroot}%{_libdir}/cmake/CoralDAQ/CoralDAQConfig.cmake
 printf "set(PACKAGE_VERSION \"%{_pver}\")\n" \
     | tee %{buildroot}%{_libdir}/cmake/CoralDAQ/CoralDAQConfigVersion.cmake
 
+mkdir -p %{buildroot}%{_datadir}/CoralDAQ
+cp -r %{_sbuilddir}/../../../maps/*.xml %{buildroot}%{_datadir}/CoralDAQ
+
 %clean
 rm -rf %{buildroot}
 rm -f %{SOURCE0}
@@ -60,20 +64,25 @@ rm -f %{SOURCE0}
 %files
 %defattr(-,root,root)
 %{_libdir}/*.so
-
+%dir %{_datadir}/CoralDAQ
+%dir %{_datadir}/CoralDAQ/20*.xml
+%{_datadir}/CoralDAQ/20*.xml/*.xml
+%dir %{_datadir}/CoralDAQ/test.xml
+%{_datadir}/CoralDAQ/test.xml/*.xml
 
 %package devel
 Summary: Data acquisition library from Coral suite (development files)
 Requires: %{name}
 Requires: na64-date-monitoring-devel
+Requires: expat-devel
 
 %description devel
 Data acquisition library from Coral suite (development files).
 
 %files devel
 %defattr(-,root,root)
-%dir %{_includedir}/CoralDAQ
-%{_includedir}/CoralDAQ/*.h
+%dir %{_includedir}/na64/ddd-ext
+%{_includedir}/na64/ddd-ext/*.h
 %dir %{_libdir}/cmake/CoralDAQ
 %{_libdir}/cmake/CoralDAQ/*.cmake
 

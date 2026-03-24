@@ -7,6 +7,7 @@ set( ${PROJECT_NAME}_VERSION_MINOR 1 )
 set( ${PROJECT_NAME}_VERSION_PATCH 0 )
 
 find_package(DATEMONITORING CONFIG REQUIRED)
+find_package(EXPAT REQUIRED)
 
 include_directories(src
                     ${DATEMONITORING_INCLUDE_DIRS}
@@ -22,11 +23,12 @@ file(GLOB DAQSOURCES src/*.cc)
 file(GLOB DAQHEADERS src/*.h)
 list(APPEND DAQHEADERS ${CMAKE_CURRENT_BINARY_DIR}/config.h)
 
-add_library(CoralDaq SHARED ${DAQSOURCES})
+add_library(ddd-ext SHARED ${DAQSOURCES})
 
-target_link_libraries(CoralDaq ${DATEMONITORING_LIBRARIES})
+target_link_libraries(ddd-ext ${DATEMONITORING_LIBRARIES}
+                              ${EXPAT_LIBRARIES})
 
-install(TARGETS CoralDaq DESTINATION ${CMAKE_INSTALL_PREFIX}/lib64)
+install(TARGETS ddd-ext DESTINATION ${CMAKE_INSTALL_PREFIX}/lib64)
 
-install(FILES ${DAQHEADERS} DESTINATION "${CMAKE_INSTALL_PREFIX}/include/${PROJECT_NAME}")
+install(FILES ${DAQHEADERS} DESTINATION "${CMAKE_INSTALL_PREFIX}/include/na64/ddd-ext")
 
