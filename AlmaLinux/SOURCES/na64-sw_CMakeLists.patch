@@ -1,0 +1,15 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index b8762645..8bb0e928 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -3,7 +3,9 @@ cmake_minimum_required( VERSION 3.19 )
+ # ___________________________________________________/ General Project Features
+ # Build versioning
+ include (extensions/cmake/version.cmake)
+-get_pkg_version(na64sw)
++set (na64sw_VERSION_MAJOR 0)
++set (na64sw_VERSION_MINOR 6)
++set (na64sw_VERSION_TWEAK 1)
+ set (na64sw_VERSION ${na64sw_VERSION_MAJOR}.${na64sw_VERSION_MINOR}.${na64sw_VERSION_TWEAK})
+ set (na64sw_SOVERSION ${na64sw_VERSION_MAJOR}.${na64sw_VERSION_MINOR})
+ 
