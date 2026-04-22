@@ -1,0 +1,41 @@
+#!/bin/bash
+
+export QA_SKIP_BUILD_ROOT=1
+
+set -e
+
+yum -y install bison flex root root-genvector root-geom root-graf3d-eve \
+               root-montecarlo-eg root-smatrix expat-devel xerces-c-devel \
+               gsl-devel zlib-devel yaml-cpp-devel boost-devel \
+               log4cpp-devel eigen3-devel
+
+rpmbuild -ba SPECS/clhep.spec
+sudo yum -y localinstall RPMS/x86_64/clhep*
+
+rpmbuild -ba SPECS/geant4.spec
+sudo yum -y localinstall RPMS/x86_64/geant4*
+
+rpmbuild -ba SPECS/na64-dmg4.spec
+sudo yum -y localinstall RPMS/x86_64/na64-dmg4*
+
+rpmbuild -ba SPECS/na64-geant4-lib.spec
+
+rpmbuild -ba SPECS/crankone-catsc.spec
+rpmbuild -ba SPECS/crankone-hdql.spec
+rpmbuild -ba SPECS/crankone-sdc.spec
+rpmbuild -ba SPECS/genfit.spec
+rpmbuild -ba SPECS/na64-date-monitoring.spec
+sudo yum -y localinstall RPMS/x86_64/na64-date-monitoring* \
+                         RPMS/x86_64/genfit* \
+                         RPMS/x86_64/crankone*
+
+rpmbuild -ba SPECS/na64-coral-daq.spec
+rpmbuild -ba SPECS/na64utils-msadc.spec
+rpmbuild -ba SPECS/p348-tracking-tool.spec
+sudo yum -y localinstall RPMS/x86_64/na64-coral-daq* \
+                         RPMS/x86_64/na64utils-msadc* \
+                         RPMS/x86_64/p348-tracking-tool*
+
+rpmbuild -ba SPECS/na64-sw.spec
+
+

@@ -18,6 +18,7 @@ Group: Development/Libraries
 BuildArch: %{_arch}
 BuildRequires: cmake
 BuildRequires: make
+BuildRequires: chrpath
 BuildRequires: gsl-devel
 BuildRequires: zlib-devel
 BuildRequires: json-devel
@@ -51,6 +52,16 @@ cd %{_cbuilddir}
 make install
 mv %{buildroot}%{_prefix}/lib %{buildroot}%{_libdir}
 
+chrpath --delete %{buildroot}%{_bindir}/na64util-fit-waveforms %{buildroot}%{_libdir}/*.so
+
+sed -i -e 's|%{buildroot}/usr|%{_prefix}|g' %{buildroot}%{_includedir}/na64/libna64utils-config.h
+
+mkdir -p %{buildroot}%{_sysconfdir}/profile.d
+printf "export LIBNA64UTILS_BASE_CONFIG_PATH=%{_datadir}/na64/libna64utils" \
+       | tee %{buildroot}%{_sysconfdir}/profile.d/na64utils-msadc.sh
+printf "setenv LIBNA64UTILS_BASE_CONFIG_PATH %{_datadir}/na64/libna64utils" \
+       | tee %{buildroot}%{_sysconfdir}/profile.d/na64utils-msadc.csh
+
 %clean
 rm -rf %{buildroot}
 rm -f %{SOURCE0}
@@ -66,6 +77,7 @@ rm -f %{SOURCE0}
 %{_datadir}/na64/libna64utils/fit-procs/*.json
 %dir %{_datadir}/na64/libna64utils/wf-reco
 %{_datadir}/na64/libna64utils/wf-reco/*.json
+%{_sysconfdir}/profile.d/na64utils-msadc.*
 
 %package devel
 Summary: Common numerical and reconstruction routines for NA64 (development files)

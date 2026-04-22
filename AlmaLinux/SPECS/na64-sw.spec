@@ -2,7 +2,7 @@
 %undefine _disable_source_fetch
 
 %global _pver 0.6.1
-%global _tagver 16703e3f7cb84766dfdf2b1186bdf080a6cbf144
+%global _tagver ec0b4bba9b44a4beb7ae4cba47f0721ae9015d1d
 
 %global _sbuilddir %{_builddir}/%{name}-%{version}/na64sw-%{_tagver}
 %global _cbuilddir %{_builddir}/%{name}-%{version}/build
@@ -29,6 +29,8 @@ BuildRequires: log4cpp-devel
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 AutoReqProv: yes
 Source0: https://gitlab.cern.ch/P348/na64sw/-/archive/%{_tagver}/na64sw-%{_tagver}.zip
+Source1: na64-sw_setup.sh
+Source2: na64-sw_setup.csh
 Patch0: na64-sw_CMakeLists.patch
 
 %description
@@ -56,6 +58,10 @@ make install
 mv %{buildroot}%{_prefix}/lib %{buildroot}%{_libdir}
 mv %{buildroot}%{_prefix}/etc %{buildroot}
 
+mkdir -p %{buildroot}%{_sysconfdir}/profile.d
+cp %{SOURCE1} %{buildroot}%{_sysconfdir}/profile.d/na64sw-setup.sh
+cp %{SOURCE2} %{buildroot}%{_sysconfdir}/profile.d/na64sw-setup.csh
+
 rm -rf %{buildroot}/%{_datadir}/na64sw/run
 
 chrpath --delete %{buildroot}%{_bindir}/na64sw-* \
@@ -71,10 +77,12 @@ rm -f %{SOURCE0}
 %defattr(-,root,root)
 %dir %{_libdir}/na64sw-extensions
 %{_libdir}/*.so.*
+# TODO missing library *.so
 %{_libdir}/na64sw-extensions/*.so.*
 %{_bindir}/*
 %dir %{_sysconfdir}/na64sw/
 %{_sysconfdir}/na64sw/*.yaml
+%{_sysconfdir}/profile.d/na64sw-setup.*
 %dir %{_datadir}/na64sw
 %dir %{_datadir}/na64sw/calibrations
 %dir %{_datadir}/na64sw/calibrations/override
