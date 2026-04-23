@@ -2,7 +2,7 @@
 %undefine _disable_source_fetch
 
 %global _pver 0.6.1
-%global _tagver ec0b4bba9b44a4beb7ae4cba47f0721ae9015d1d
+%global _tagver fed4d2cc8b97de09a65584920507c4d5b832c66c
 
 %global _sbuilddir %{_builddir}/%{name}-%{version}/na64sw-%{_tagver}
 %global _cbuilddir %{_builddir}/%{name}-%{version}/build
@@ -26,6 +26,7 @@ BuildRequires: na64utils-msadc-devel
 BuildRequires: genfit-devel
 BuildRequires: na64-coral-daq-devel
 BuildRequires: log4cpp-devel
+BuildRequires: avro-c-devel
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 AutoReqProv: yes
 Source0: https://gitlab.cern.ch/P348/na64sw/-/archive/%{_tagver}/na64sw-%{_tagver}.zip
@@ -76,9 +77,15 @@ rm -f %{SOURCE0}
 %files
 %defattr(-,root,root)
 %dir %{_libdir}/na64sw-extensions
-%{_libdir}/*.so.*
-# TODO missing library *.so
-%{_libdir}/na64sw-extensions/*.so.*
+%{_libdir}/libdddMap.so.*
+%{_libdir}/libna64common.so
+%{_libdir}/libna64sw-app.so.*
+%{_libdir}/libna64sw-calib.so.*
+%{_libdir}/libna64sw-detID.so.*
+%{_libdir}/libna64sw-dp.so.*
+%{_libdir}/libna64sw-event.so.*
+%{_libdir}/libna64sw-util.so.*
+%{_libdir}/na64sw-extensions/*
 %{_bindir}/*
 %dir %{_sysconfdir}/na64sw/
 %{_sysconfdir}/na64sw/*.yaml
@@ -92,6 +99,7 @@ rm -f %{SOURCE0}
 %dir %{_datadir}/na64sw/calibrations/override/2023
 %dir %{_datadir}/na64sw/calibrations/override/arttrack
 %{_datadir}/na64sw/*.yaml
+%{_datadir}/na64sw/*.json
 %{_datadir}/na64sw/calibrations/*.yaml
 %{_datadir}/na64sw/calibrations/*.csv
 %{_datadir}/na64sw/calibrations/override/2017/*
@@ -110,11 +118,17 @@ Requires: na64utils-msadc-devel
 Requires: genfit-devel
 Requires: na64-coral-daq-devel
 Requires: log4cpp-devel
+Requires: avro-c-devel
 
 %files devel
 %defattr(-,root,root)
-%{_libdir}/*.so
-%{_libdir}/na64sw-extensions/*.so
+%{_libdir}/libdddMap.so
+%{_libdir}/libna64sw-app.so
+%{_libdir}/libna64sw-calib.so
+%{_libdir}/libna64sw-detID.so
+%{_libdir}/libna64sw-dp.so
+%{_libdir}/libna64sw-event.so
+%{_libdir}/libna64sw-util.so
 %{_libdir}/pkgconfig/na64sw.pc
 %dir %{_includedir}/na64sw
 %dir %{_includedir}/na64sw/extensions
@@ -174,6 +188,6 @@ Framework for analysis and reconstruction of NA64 experimental data (development
 
 
 %changelog
-* Fri Apr 17 2026 Paolo Andreetto <paolo.andreetto@pd.infn.it> - 0.6.1-1
+* Thu Apr 23 2026 Paolo Andreetto <paolo.andreetto@pd.infn.it> - 0.6.1-1
 - First release for AlmaLinux
 
