@@ -1,8 +1,8 @@
 %global debug_package %{nil}
 %undefine _disable_source_fetch
 
-%global _pver 2.15.1
-%global _tagver e6c8ff61dd21d8ae2570dc6ff6fbfa6bfd3290e7
+%global _pver 2.20.0
+%global _tagver v2.20
 
 %global _sbuilddir %{_builddir}/%{name}-%{version}/na64utils-msadc-%{_tagver}
 %global _cbuilddir %{_builddir}/%{name}-%{version}/build
@@ -26,7 +26,7 @@ BuildRequires: yaml-cpp-devel
 BuildRequires: root
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 AutoReqProv: yes
-Source0: https://gitlab.cern.ch/P348/na64utils-msadc/-/archive/%{_tagver}/na64utils-msadc-%{_tagver}.zip
+Source0: https://gitlab.cern.ch/P348/na64utils-msadc/-/archive/%{_tagver}/na64utils-msadc-%{_tagver}.tar.gz
 Patch0: na64utils-msadc_cmake.patch
 
 %description
@@ -101,20 +101,23 @@ Common numerical and reconstruction routines for NA64 (development files).
 %{_includedir}/na64/baselines/*.h
 %dir %{_includedir}/na64/ecal-calib/
 %{_includedir}/na64/ecal-calib/*.h
-%dir %{_includedir}/na64/moyal/
-%{_includedir}/na64/moyal/*.h
-%{_includedir}/na64/moyal/*.hh
-%dir %{_includedir}/na64/npole/
-%{_includedir}/na64/npole/*.h
-%{_includedir}/na64/npole/*.hh
 %dir %{_includedir}/na64/sys-util/
 %{_includedir}/na64/sys-util/*.hh
 %dir %{_includedir}/na64/user-api/
 %{_includedir}/na64/user-api/*.h
 %{_includedir}/na64/user-api/*.hh
-%dir %{_includedir}/na64/wf-templates/
-%{_includedir}/na64/wf-templates/*.h
-%{_includedir}/na64/wf-templates/*.hh
+%dir %{_includedir}/na64/wf-fit
+%{_includedir}/na64/wf-fit/*.hh
+%{_includedir}/na64/wf-fit/*.h
+%dir %{_includedir}/na64/wf-fit/moyal
+%{_includedir}/na64/wf-fit/moyal/*.h
+%{_includedir}/na64/wf-fit/moyal/*.hh
+%dir %{_includedir}/na64/wf-fit/npole
+%{_includedir}/na64/wf-fit/npole/*.h
+%{_includedir}/na64/wf-fit/npole/*.hh
+%dir %{_includedir}/na64/wf-fit/wf-templates
+%{_includedir}/na64/wf-fit/wf-templates/*.h
+%{_includedir}/na64/wf-fit/wf-templates/*.hh
 %dir %{_includedir}/umff/
 %{_includedir}/umff/*.h
 %{_includedir}/umff/*.hh
@@ -122,12 +125,25 @@ Common numerical and reconstruction routines for NA64 (development files).
 %{_includedir}/umff/algo/*.hh
 %dir %{_includedir}/umff/fitters
 %{_includedir}/umff/fitters/*.hh
+%dir %{_includedir}/umff/fitters/gsl-workspaces
+%{_includedir}/umff/fitters/gsl-workspaces/*.hh
+%dir %{_includedir}/umff/model
+%{_includedir}/umff/model/*.hh
+%dir %{_includedir}/umff/model/multimodel
+%{_includedir}/umff/model/multimodel/*.hh
+%dir %{_includedir}/umff/model/parametric
+%{_includedir}/umff/model/parametric/*.hh
+%dir %{_includedir}/umff/model/parametric-multimodel-in-domain
+%{_includedir}/umff/model/parametric-multimodel-in-domain/*.hh
+%dir %{_includedir}/umff/model/parametric-multimodel
+%{_includedir}/umff/model/parametric-multimodel/*.hh
 %dir %{_includedir}/umff/numeric
 %{_includedir}/umff/numeric/*.h
 %{_includedir}/umff/numeric/*.hh
 
 
+
 %changelog
-* Mon Jan 19 2026 Paolo Andreetto <paolo.andreetto@pd.infn.it> - 2.15.1-1
+* Tue Apr 28 2026 Paolo Andreetto <paolo.andreetto@pd.infn.it> - 2.20.0-1
 - First release for AlmaLinux
 

@@ -1,5 +1,5 @@
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index ee98557..b60a89a 100644
+index f9bac5c..34678ef 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -7,7 +7,10 @@ cmake_minimum_required( VERSION 3.23 )
@@ -10,11 +10,20 @@ index ee98557..b60a89a 100644
 +
 +set( LIBNA64UTIL_VERSION_MAJOR 2 )
 +set( LIBNA64UTIL_VERSION_MINOR 15 )
-+set(LIBNA64UTIL_VERSION_TWEAK 1 )
++set( LIBNA64UTIL_VERSION_TWEAK 1 )
  
  set( LIBNA64UTIL_VERSION ${LIBNA64UTIL_VERSION_MAJOR}.${LIBNA64UTIL_VERSION_MINOR}.${LIBNA64UTIL_VERSION_TWEAK} )
  project(na64util VERSION "${LIBNA64UTIL_VERSION}")
-@@ -193,7 +196,7 @@ file( GLOB_RECURSE libna64util_HEADERS
+@@ -39,7 +42,7 @@ find_package(PkgConfig)
+ find_package(GSL REQUIRED)
+ find_package(ZLIB)
+ find_package(nlohmann_json)
+-#find_package(yaml-cpp)  # FIXME: experimental; breaks native build of p348-daq!
++find_package(yaml-cpp)  # FIXME: experimental; breaks native build of p348-daq!
+ find_package(sdc)
+ 
+ if(yaml-cpp_FOUND)
+@@ -198,7 +201,7 @@ file( GLOB_RECURSE libna64util_HEADERS
  
  # Add library target
  set(na64util_LIB ${CMAKE_PROJECT_NAME})
