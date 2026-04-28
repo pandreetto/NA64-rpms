@@ -2,7 +2,7 @@
 %undefine _disable_source_fetch
 
 %global _pver 0.6.1
-%global _tagver fed4d2cc8b97de09a65584920507c4d5b832c66c
+%global _tagver c165e7b42e2c1a2724345ae148dd66f6dac7d792
 
 %global _sbuilddir %{_builddir}/%{name}-%{version}/na64sw-%{_tagver}
 %global _cbuilddir %{_builddir}/%{name}-%{version}/build
@@ -33,6 +33,12 @@ Source0: https://gitlab.cern.ch/P348/na64sw/-/archive/%{_tagver}/na64sw-%{_tagve
 Source1: na64-sw_setup.sh
 Source2: na64-sw_setup.csh
 Patch0: na64-sw_CMakeLists.patch
+Patch1: na64-sw_findDDD.patch
+Patch2: na64-sw_histo.patch
+Patch3: na64-sw_cmake01.patch
+Patch4: na64-sw_cmake02.patch
+Patch5: na64-sw_cmake03.patch
+Patch6: na64-sw_cmake04.patch
 
 %description
 Framework for analysis and reconstruction of NA64 experimental data
@@ -42,6 +48,12 @@ Framework for analysis and reconstruction of NA64 experimental data
 rm -rf %{buildroot}
 mkdir -p %{buildroot}
 patch %{_sbuilddir}/CMakeLists.txt %{PATCH0}
+patch %{_sbuilddir}/extensions/cmake/FindDDD.cmake %{PATCH1}
+patch %{_sbuilddir}/extensions/handlers/generic/getterBasedROOTHistHandler.hh %{PATCH2}
+patch %{_sbuilddir}/extensions/handlers/CMakeLists.txt %{PATCH3}
+patch %{_sbuilddir}/extensions/handlers-exp/CMakeLists.txt %{PATCH4}
+patch %{_sbuilddir}/extensions/na64common/CMakeLists.txt %{PATCH5}
+patch %{_sbuilddir}/extensions/source-ddd/CMakeLists.txt %{PATCH6}
 
 %build
 mkdir %{_cbuilddir}
@@ -188,6 +200,6 @@ Framework for analysis and reconstruction of NA64 experimental data (development
 
 
 %changelog
-* Thu Apr 23 2026 Paolo Andreetto <paolo.andreetto@pd.infn.it> - 0.6.1-1
+* Tue Apr 28 2026 Paolo Andreetto <paolo.andreetto@pd.infn.it> - 0.6.1-1
 - First release for AlmaLinux
 

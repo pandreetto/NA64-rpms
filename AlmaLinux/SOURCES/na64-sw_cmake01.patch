@@ -1,0 +1,13 @@
+diff --git a/extensions/handlers/CMakeLists.txt b/extensions/handlers/CMakeLists.txt
+index 12eca1fa..6c34f648 100644
+--- a/extensions/handlers/CMakeLists.txt
++++ b/extensions/handlers/CMakeLists.txt
+@@ -24,7 +24,7 @@ set( na64std_MODULE_SOURCES
+         generic/count1D.cc
+         generic/subpipe.cc
+         generic/pipeSection.cc
+-        generic/events-range-enable.cc
++        #generic/events-range-enable.cc
+         generic/fallback.cc
+         generic/hdql/key.cc
+         generic/hdql/histogram.cc

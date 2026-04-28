@@ -1,0 +1,12 @@
+diff --git a/extensions/source-ddd/CMakeLists.txt b/extensions/source-ddd/CMakeLists.txt
+index 22f8b7a8..2e2c964d 100644
+--- a/extensions/source-ddd/CMakeLists.txt
++++ b/extensions/source-ddd/CMakeLists.txt
+@@ -15,6 +15,7 @@ find_path( CORAL_MAPS_DIR
+     NAMES 2015.xml/ECAL.xml 2015.xml/HCAL.xml
+     HINTS ${DaqDataDecoding_INCLUDE_DIR}/../../maps/
+           ${DaqDataDecoding_INCLUDE_DIR}/../../../../maps/
++          ${CORAL_DAQ_MAPS_DIR}
+     NO_DEFAULT_PATH
+     NO_CACHE
+     )

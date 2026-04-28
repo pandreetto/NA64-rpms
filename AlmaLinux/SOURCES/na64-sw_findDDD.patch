@@ -1,0 +1,41 @@
+diff --git a/extensions/cmake/FindDDD.cmake b/extensions/cmake/FindDDD.cmake
+index 64998479..b60557a7 100644
+--- a/extensions/cmake/FindDDD.cmake
++++ b/extensions/cmake/FindDDD.cmake
+@@ -12,6 +12,7 @@ find_path( DaqDataDecoding_INCLUDE_DIR
+                  /usr/include
+                  /usr/include/coral
+                  /usr/include/na64
++                 /usr/include/na64/ddd-ext
+                  ${CMAKE_INSTALL_PREFIX}/include
+                  ${CMAKE_INSTALL_PREFIX}/include/coral
+                  ${CMAKE_INSTALL_PREFIX}/include/na64
+@@ -19,7 +20,7 @@ find_path( DaqDataDecoding_INCLUDE_DIR
+                  ${CMAKE_INSTALL_PREFIX}/opt/p348-daq.current/coral/src/DaqDataDecoding/src
+     )
+ find_library( date_monitor_LIB
+-           NAMES libmonitor.a libmonitorstdalone.a
++           NAMES libmonitor.a libmonitorstdalone.a libdate-monitoring.so
+            PATHS $ENV{p348daq_PREFIX}/date/lib
+                  $ENV{p348daq_PREFIX}/date/lib64
+                  $ENV{p348daq_PREFIX}/date/monitoring/Linux
+@@ -31,9 +32,10 @@ find_library( date_monitor_LIB
+                  ${CMAKE_INSTALL_PREFIX}/lib64/na64
+                  ${CMAKE_INSTALL_PREFIX}/opt/p348-daq/date/monitoring/Linux
+                  ${CMAKE_INSTALL_PREFIX}/opt/p348-daq.current/date/monitoring/Linux
++                 ${NA64_DATE_PREFIX}/lib64
+     )
+ find_library( DaqDataDecoding_LIB
+-           NAMES libDaqDataDecoding.a libDaqDataDecoding.6.0.a
++           NAMES libDaqDataDecoding.a libDaqDataDecoding.6.0.a libddd-ext.so
+            PATHS $ENV{CORAL}/src/DaqDataDecoding/src
+                  $ENV{p348daq_PREFIX}/coral/src/DaqDataDecoding/src
+                  ${CMAKE_INSTALL_PREFIX}/lib
+@@ -42,6 +44,7 @@ find_library( DaqDataDecoding_LIB
+                  ${CMAKE_INSTALL_PREFIX}/lib64/na64
+                  ${CMAKE_INSTALL_PREFIX}/opt/p348-daq/coral/src/DaqDataDecoding/src
+                  ${CMAKE_INSTALL_PREFIX}/opt/p348-daq.current/coral/src/DaqDataDecoding/src
++                 ${NA64_DATE_PREFIX}/lib64
+     )
+ find_package_handle_standard_args( DaqDataDecoding
+     REQUIRED_VARS DaqDataDecoding_LIB

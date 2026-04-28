@@ -1,0 +1,52 @@
+diff --git a/extensions/handlers/generic/getterBasedROOTHistHandler.hh b/extensions/handlers/generic/getterBasedROOTHistHandler.hh
+index b5cba7ed..b3cb3b55 100644
+--- a/extensions/handlers/generic/getterBasedROOTHistHandler.hh
++++ b/extensions/handlers/generic/getterBasedROOTHistHandler.hh
+@@ -104,12 +104,13 @@ public:
+                               , const std::string & namingClass
+                               ) : AbstractHitHandler<HitT>(cdsp, only, logCat, namingClass)
+                                 , ThisTDirAdapter(cdsp, namingClass)
+-                                , _hstParams(hstp)
+                                 , _getWeight(weightGetter)
+                                 , _hstBaseName(baseName)
+                                 , _hstDescription(description)
+                                 , _overridenPath(overPath)
+-                                { }
++    {
++        for (size_t k = 0; k < arityT; k++) _hstParams[k] = hstp[k];
++    }
+     /// Deletes created objects
+     ~GetterBasedROOTHistHandler() {
+         for(auto p : _histograms) {
+@@ -215,12 +216,13 @@ public:
+                               , log4cpp::Category & logCat
+                               ) : AbstractHandler(logCat)
+                                 , _histogram(nullptr)
+-                                , _hstParams(hstp)
+                                 , _getWeight(weightGetter)
+                                 , _hstBaseName(baseName)
+                                 , _hstDescription(description)
+                                 , _overridenPath(overPath)
+-                                { }
++    {
++        for (size_t k = 0; k < arityT; k++) _hstParams[k] = hstp[k];
++    }
+     /// Deletes created objects
+     ~GetterBasedROOTHistHandler() {
+         if(_histogram)
+@@ -319,12 +321,13 @@ public:
+                                 , ThisTDirAdapter(cdsp, namingClass)
+                                 , ExtendedTrackScoreGetters(cdsp, logCat, namingClass, placementsClass)
+                                 , SelectiveHandlerMixin(cdsp, detsOnly, logCat, namingClass)
+-                                , _hstParams(hstp)
+                                 , _getWeight(weightGetter)
+                                 , _hstBaseName(baseName)
+                                 , _hstDescription(description)
+                                 , _overridenPath(overPath)
+-                                { }
++    {
++        for (size_t k = 0; k < arityT; k++) _hstParams[k] = hstp[k];
++    }
+     /// Deletes created objects
+     ~GetterBasedROOTHistHandler() {
+         for(auto p : _histograms) {
