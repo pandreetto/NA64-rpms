@@ -23,12 +23,12 @@ file(GLOB DAQSOURCES src/*.cc)
 file(GLOB DAQHEADERS src/*.h)
 list(APPEND DAQHEADERS ${CMAKE_CURRENT_BINARY_DIR}/config.h)
 
-add_library(ddd-ext SHARED ${DAQSOURCES})
+add_library(coral-ddd SHARED ${DAQSOURCES})
 
-target_link_libraries(ddd-ext ${DATEMONITORING_LIBRARIES}
+target_link_libraries(coral-ddd ${DATEMONITORING_LIBRARIES}
                               ${EXPAT_LIBRARIES})
 
-install(TARGETS ddd-ext DESTINATION ${CMAKE_INSTALL_PREFIX}/lib64)
+install(TARGETS coral-ddd DESTINATION ${CMAKE_INSTALL_PREFIX}/lib64)
 
-install(FILES ${DAQHEADERS} DESTINATION "${CMAKE_INSTALL_PREFIX}/include/na64/ddd-ext")
+install(FILES ${DAQHEADERS} DESTINATION "${CMAKE_INSTALL_PREFIX}/include/na64/coral-ddd")
 

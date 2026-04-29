@@ -81,8 +81,8 @@ Data acquisition library from Coral suite (development files).
 
 %files devel
 %defattr(-,root,root)
-%dir %{_includedir}/na64/ddd-ext
-%{_includedir}/na64/ddd-ext/*.h
+%dir %{_includedir}/na64/coral-ddd
+%{_includedir}/na64/coral-ddd/*.h
 %dir %{_libdir}/cmake/CoralDAQ
 %{_libdir}/cmake/CoralDAQ/*.cmake
 
