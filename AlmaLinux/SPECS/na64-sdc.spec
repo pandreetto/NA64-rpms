@@ -2,7 +2,7 @@
 %undefine _disable_source_fetch
 
 %global _pver 0.5.0
-%global _tagver 0.5
+%global _tagver v0.5
 
 %global _sbuilddir %{_builddir}/%{name}-%{version}/sdc-%{_tagver}
 %global _cbuilddir %{_builddir}/%{name}-%{version}/build
@@ -10,12 +10,12 @@
 %global cmake_sdc_dir %{_libdir}/cmake/sdc
 
 Summary: Calibration data based on a file structure
-Name: crankone-sdc
+Name: na64-sdc
 Version: %{_pver}
 Release: 1.na64%{?dist}
 License: LGPL 2.1
 Vendor: CERN
-URL: https://github.com/CrankOne/sdc
+URL: https://gitlab.cern.ch/na64-packaging/sdc
 Group: Development/Libraries
 BuildArch: %{_arch}
 BuildRequires: cmake
@@ -25,8 +25,8 @@ BuildRequires: root
 BuildRequires: root-mathcore
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 AutoReqProv: yes
-Source0: https://github.com/CrankOne/sdc/archive/refs/tags/v%{_tagver}.tar.gz
-Patch0: crankone-sdc_cmake.patch
+Source0: https://gitlab.cern.ch/na64-packaging/sdc/-/archive/%{_tagver}/sdc-%{_tagver}.tar.gz
+Patch0: na64-sdc_cmake.patch
 
 %description
 Calibration data based on a file structure

@@ -2,18 +2,18 @@
 %undefine _disable_source_fetch
 
 %global _pver 1.0.0
-%global _tagver 1.0
+%global _tagver v1.0
 
 %global _sbuilddir %{_builddir}/%{name}-%{version}/catsc-%{_tagver}
 %global _cbuilddir %{_builddir}/%{name}-%{version}/build
 
 Summary: Generic C/C++ implementation of cellular automata for track finding
-Name: crankone-catsc
+Name: na64-catsc
 Version: %{_pver}
 Release: 1.na64%{?dist}
 License: MPL 2.0
 Vendor: CERN
-URL: https://github.com/CrankOne/catsc
+URL: https://gitlab.cern.ch/na64-packaging/catsc
 Group: Development/Libraries
 BuildArch: %{_arch}
 BuildRequires: cmake
@@ -21,7 +21,7 @@ BuildRequires: make
 BuildRequires: chrpath
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 AutoReqProv: yes
-Source0: https://github.com/CrankOne/catsc/archive/refs/tags/v%{_tagver}.tar.gz
+Source0: https://gitlab.cern.ch/na64-packaging/catsc/-/archive/%{_tagver}/catsc-%{_tagver}.tar.gz
 
 %description
 This code is based on the algorithm of cellular automaton evolution proposed for track finding.

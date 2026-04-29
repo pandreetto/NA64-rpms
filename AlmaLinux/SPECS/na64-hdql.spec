@@ -8,12 +8,12 @@
 %global _cbuilddir %{_builddir}/%{name}-%{version}/build
 
 Summary: Hierarchical data query language
-Name: crankone-hdql
+Name: na64-hdql
 Version: %{_pver}
 Release: 1.na64%{?dist}
 License: GPL v.3
 Vendor: CERN
-URL: https://github.com/CrankOne/hdql
+URL: https://gitlab.cern.ch/na64-packaging/hdql
 Group: Development/Libraries
 BuildArch: %{_arch}
 BuildRequires: cmake
@@ -23,9 +23,9 @@ BuildRequires: bison
 BuildRequires: flex
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 AutoReqProv: yes
-Source0: https://github.com/CrankOne/hdql/archive/%{_tagver}.zip
-Source1: crankone-hdql_hdqlConfig.cmake
-Patch0: crankone-hdql_CMakeLists.patch
+Source0: https://gitlab.cern.ch/na64-packaging/hdql/-/archive/%{_tagver}/hdql-%{_tagver}.tar.gz
+Source1: na64-hdql_hdqlConfig.cmake
+Patch0: na64-hdql_CMakeLists.patch
 
 %description
 HDQLang is domain-specific language designed to be embeddable and reasonably
