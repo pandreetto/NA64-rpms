@@ -1,0 +1,24 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index b6755b5..07c09f7 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -1,7 +1,9 @@
+ cmake_minimum_required( VERSION 3.9 )
+ 
+ include (cmake/version.cmake)
+-get_pkg_version (ddd_ext)
++set (ddd_ext_VERSION_MAJOR 1)
++set (ddd_ext_VERSION_MINOR 1)
++set (ddd_ext_VERSION_TWEAK 1)
+ set (ddd_ext_VERSION ${ddd_ext_VERSION_MAJOR}.${ddd_ext_VERSION_MINOR}.${ddd_ext_VERSION_TWEAK})
+ 
+ project(ddd-ext VERSION ${ddd_ext_VERSION})
+@@ -35,7 +37,7 @@ include (GNUInstallDirs)
+ # Library
+ add_compile_options (-Wall)
+ set( ddd_ext_LIB ddd-ext )
+-add_library(${ddd_ext_LIB}
++add_library(${ddd_ext_LIB} SHARED
+     src/event-id.cc
+     src/event-id-range.cc
+     src/event-selection.cc
