@@ -19,12 +19,12 @@ BuildArch: %{_arch}
 BuildRequires: cmake
 BuildRequires: make
 BuildRequires: chrpath
-BuildRequires: crankone-hdql-devel
-BuildRequires: crankone-catsc-devel
-BuildRequires: crankone-sdc-devel
+BuildRequires: na64-hdql-devel
+BuildRequires: na64-catsc-devel
+BuildRequires: na64-sdc-devel
 BuildRequires: na64utils-msadc-devel
 BuildRequires: genfit-devel
-BuildRequires: na64-coral-daq-devel
+BuildRequires: na64-ddd-ext-devel
 BuildRequires: log4cpp-devel
 BuildRequires: avro-c-devel
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -35,10 +35,7 @@ Source2: na64-sw_setup.csh
 Patch0: na64-sw_CMakeLists.patch
 Patch1: na64-sw_findDDD.patch
 Patch2: na64-sw_histo.patch
-Patch3: na64-sw_cmake01.patch
-Patch4: na64-sw_cmake02.patch
-Patch5: na64-sw_cmake03.patch
-Patch6: na64-sw_cmake04.patch
+Patch3: na64-sw_dddmaps.patch
 
 %description
 Framework for analysis and reconstruction of NA64 experimental data
@@ -50,10 +47,7 @@ mkdir -p %{buildroot}
 patch %{_sbuilddir}/CMakeLists.txt %{PATCH0}
 patch %{_sbuilddir}/extensions/cmake/FindDDD.cmake %{PATCH1}
 patch %{_sbuilddir}/extensions/handlers/generic/getterBasedROOTHistHandler.hh %{PATCH2}
-patch %{_sbuilddir}/extensions/handlers/CMakeLists.txt %{PATCH3}
-patch %{_sbuilddir}/extensions/handlers-exp/CMakeLists.txt %{PATCH4}
-patch %{_sbuilddir}/extensions/na64common/CMakeLists.txt %{PATCH5}
-patch %{_sbuilddir}/extensions/source-ddd/CMakeLists.txt %{PATCH6}
+patch %{_sbuilddir}/extensions/source-ddd/CMakeLists.txt %{PATCH3}
 
 %build
 mkdir %{_cbuilddir}
@@ -62,6 +56,7 @@ cmake -DCMAKE_INSTALL_PREFIX=%{buildroot}%{_prefix} \
       -DCMAKE_BUILD_TYPE=RelWithDebInfo \
       -DCMAKE_CXX_STANDARD=17 \
       -DCORAL_DAQ_MAPS_DIR=/usr/share/CoralDAQ \
+      -DNA64_DATE_PREFIX=/usr \
       %{_sbuilddir}
 make %{?_smp_mflags}
 
@@ -123,12 +118,12 @@ rm -f %{SOURCE0}
 %package devel
 Summary: Framework for analysis and reconstruction of NA64 experimental data (development files)
 Requires: %{name}
-Requires: crankone-hdql-devel
-Requires: crankone-catsc-devel
-Requires: crankone-sdc-devel
+Requires: na64-hdql-devel
+Requires: na64-catsc-devel
+Requires: na64-sdc-devel
 Requires: na64utils-msadc-devel
 Requires: genfit-devel
-Requires: na64-coral-daq-devel
+Requires: na64-ddd-ext-devel
 Requires: log4cpp-devel
 Requires: avro-c-devel
 
