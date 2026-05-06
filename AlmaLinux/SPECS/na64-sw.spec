@@ -77,6 +77,13 @@ chrpath --delete %{buildroot}%{_bindir}/na64sw-* \
                  %{buildroot}%{_libdir}/na64sw-extensions/*.so
 sed -i -e 's|%{buildroot}/usr|%{_prefix}|g' %{buildroot}%{_libdir}/pkgconfig/*.pc
 
+mkdir -p %{buildroot}%{_sysconfdir}/na64sw
+ln -s %{_datadir}/na64sw/calibrations.yaml %{buildroot}%{_sysconfdir}/na64sw/calibrations.yaml
+ln -s %{_datadir}/na64sw/logging.yaml %{buildroot}%{_sysconfdir}/na64sw/logging.yaml
+ln -s %{_datadir}/na64sw/source-avro.yaml %{buildroot}%{_sysconfdir}/na64sw/source-avro.yaml
+ln -s %{_datadir}/na64sw/source-ddd.yaml %{buildroot}%{_sysconfdir}/na64sw/source-ddd.yaml
+mkdir -p %{buildroot}%{_datadir}/na64sw/calib
+
 %clean
 rm -rf %{buildroot}
 rm -f %{SOURCE0}
@@ -105,6 +112,7 @@ rm -f %{SOURCE0}
 %dir %{_datadir}/na64sw/calibrations/override/2022
 %dir %{_datadir}/na64sw/calibrations/override/2023
 %dir %{_datadir}/na64sw/calibrations/override/arttrack
+%dir %{_datadir}/na64sw/calib
 %{_datadir}/na64sw/*.yaml
 %{_datadir}/na64sw/*.json
 %{_datadir}/na64sw/calibrations/*.yaml
