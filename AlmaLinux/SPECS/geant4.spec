@@ -71,7 +71,7 @@ mkdir %{_cbuilddir}
 cd %{_cbuilddir}
 cmake -DCMAKE_INSTALL_PREFIX=%{buildroot}%{_prefix} \
       -DCMAKE_BUILD_TYPE=RelWithDebInfo \
-      -DCMAKE_CXX_STANDARD=17 \
+      -DCMAKE_CXX_STANDARD=20 \
       -DGEANT4_INSTALL_EXAMPLES=OFF \
       -DGEANT4_USE_GDML=ON \
       -DGEANT4_BUILD_MULTITHREADED=ON \

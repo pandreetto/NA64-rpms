@@ -40,7 +40,7 @@ mkdir %{_cbuilddir}
 cd %{_cbuilddir}
 cmake -DCMAKE_INSTALL_PREFIX=%{buildroot}%{_prefix} \
       -DCMAKE_BUILD_TYPE=RelWithDebInfo \
-      -DCMAKE_CXX_STANDARD=17 \
+      -DCMAKE_CXX_STANDARD=20 \
       -DDATEMONITORING_DIR=/usr/lib64/cmake/date-monitoring \
       -Wno-dev \
       %{_sbuilddir}

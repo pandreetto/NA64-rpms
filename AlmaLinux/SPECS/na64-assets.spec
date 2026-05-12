@@ -35,6 +35,8 @@ echo "Nothing to build"
 %install
 mkdir -p %{buildroot}%{_datadir}/na64sw/calib
 cp -r %{_sbuilddir}/calib/20* %{buildroot}%{_datadir}/na64sw/calib
+mkdir -p %{buildroot}%{_datadir}/na64sw/multiplex_map
+cp -r %{_sbuilddir}/multiplex_map/*.csv %{buildroot}%{_datadir}/na64sw/multiplex_map
 
 %clean
 rm -rf %{buildroot}
@@ -42,6 +44,7 @@ rm -f %{SOURCE0}
 
 %files
 %defattr(-,root,root)
+%dir %{_datadir}/na64sw/calib
 %dir %{_datadir}/na64sw/calib/2021
 %{_datadir}/na64sw/calib/2021/*.txt
 %dir %{_datadir}/na64sw/calib/2021mu
@@ -62,6 +65,8 @@ rm -f %{SOURCE0}
 %{_datadir}/na64sw/calib/2025/*.txt
 %dir %{_datadir}/na64sw/calib/2025hadr
 %{_datadir}/na64sw/calib/2025hadr/*.txt
+%dir %{_datadir}/na64sw/multiplex_map
+%{_datadir}/na64sw/multiplex_map/*.csv
 
 %changelog
 * Wed May 06 2026 Paolo Andreetto <paolo.andreetto@pd.infn.it> - 0.14.0-1

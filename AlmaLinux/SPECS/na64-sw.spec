@@ -54,7 +54,7 @@ mkdir %{_cbuilddir}
 cd %{_cbuilddir}
 cmake -DCMAKE_INSTALL_PREFIX=%{buildroot}%{_prefix} \
       -DCMAKE_BUILD_TYPE=RelWithDebInfo \
-      -DCMAKE_CXX_STANDARD=17 \
+      -DCMAKE_CXX_STANDARD=20 \
       -DCORAL_DAQ_MAPS_DIR=/usr/share/CoralDAQ \
       -DNA64_DATE_PREFIX=/usr \
       %{_sbuilddir}
@@ -70,7 +70,11 @@ mkdir -p %{buildroot}%{_sysconfdir}/profile.d
 cp %{SOURCE1} %{buildroot}%{_sysconfdir}/profile.d/na64sw-setup.sh
 cp %{SOURCE2} %{buildroot}%{_sysconfdir}/profile.d/na64sw-setup.csh
 
-rm -rf %{buildroot}/%{_datadir}/na64sw/run
+mv %{buildroot}/%{_datadir}/na64sw/run %{buildroot}/%{_datadir}/na64sw/run-orig
+mkdir -p %{buildroot}/%{_datadir}/na64sw/run
+mv %{buildroot}/%{_datadir}/na64sw/run-orig/default.yaml %{buildroot}/%{_datadir}/na64sw/run
+mv %{buildroot}/%{_datadir}/na64sw/run-orig/std %{buildroot}/%{_datadir}/na64sw/run
+rm -rf %{buildroot}/%{_datadir}/na64sw/run-orig
 
 chrpath --delete %{buildroot}%{_bindir}/na64sw-* \
                  %{buildroot}%{_libdir}/*.so \
@@ -82,7 +86,6 @@ ln -s %{_datadir}/na64sw/calibrations.yaml %{buildroot}%{_sysconfdir}/na64sw/cal
 ln -s %{_datadir}/na64sw/logging.yaml %{buildroot}%{_sysconfdir}/na64sw/logging.yaml
 ln -s %{_datadir}/na64sw/source-avro.yaml %{buildroot}%{_sysconfdir}/na64sw/source-avro.yaml
 ln -s %{_datadir}/na64sw/source-ddd.yaml %{buildroot}%{_sysconfdir}/na64sw/source-ddd.yaml
-mkdir -p %{buildroot}%{_datadir}/na64sw/calib
 
 %clean
 rm -rf %{buildroot}
@@ -112,7 +115,6 @@ rm -f %{SOURCE0}
 %dir %{_datadir}/na64sw/calibrations/override/2022
 %dir %{_datadir}/na64sw/calibrations/override/2023
 %dir %{_datadir}/na64sw/calibrations/override/arttrack
-%dir %{_datadir}/na64sw/calib
 %{_datadir}/na64sw/*.yaml
 %{_datadir}/na64sw/*.json
 %{_datadir}/na64sw/calibrations/*.yaml
@@ -122,6 +124,10 @@ rm -f %{SOURCE0}
 %{_datadir}/na64sw/calibrations/override/2022/*
 %{_datadir}/na64sw/calibrations/override/2023/*
 %{_datadir}/na64sw/calibrations/override/arttrack/*
+%dir %{_datadir}/na64sw/run
+%{_datadir}/na64sw/run/*.yaml
+%dir %{_datadir}/na64sw/run/std
+%{_datadir}/na64sw/run/std/*.yaml
 
 %package devel
 Summary: Framework for analysis and reconstruction of NA64 experimental data (development files)
