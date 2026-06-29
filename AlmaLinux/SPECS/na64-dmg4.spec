@@ -7,6 +7,8 @@
 %global _sbuilddir %{_builddir}/%{name}-%{version}/DMG4-%{_tagver}
 %global _cbuilddir %{_builddir}/%{name}-%{version}/build
 
+%global cmake_dmg4_dir %{_libdir}/cmake/DMG4
+
 Summary: Simulation of Dark Matter production in the electron, positron and muon beams
 Name: na64-dmg4
 Version: %{_pver}
@@ -23,6 +25,8 @@ BuildRequires: gsl-devel
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 AutoReqProv: yes
 Source0: https://gitlab.cern.ch/P348/DMG4/-/archive/%{_tagver}/DMG4-%{_tagver}.zip
+Source1: DMG4Config.cmake
+Source2: DMG4ConfigVersion.cmake
 Patch0: na64-dmg4-localbuild.patch
 
 %description
@@ -46,6 +50,9 @@ make %{?_smp_mflags}
 %install
 cd %{_cbuilddir}
 make install
+mkdir -p %{buildroot}%{cmake_dmg4_dir}
+cp %{SOURCE1} %{SOURCE2} %{buildroot}%{cmake_dmg4_dir}
+sed -i -e 's|0.0.0|%{_pver}|g' %{buildroot}%{cmake_dmg4_dir}/DMG4ConfigVersion.cmake
 
 %clean
 rm -rf %{buildroot}
@@ -76,6 +83,8 @@ Simulation of Dark Matter production in the electron, positron and muon beams (d
 %{_includedir}/DMG4/DMProcesses/*.hh
 %dir %{_includedir}/UtilsDM
 %{_includedir}/UtilsDM/*.hh
+%dir %{cmake_dmg4_dir}
+%{cmake_dmg4_dir}/*.cmake
 
 %changelog
 * Fri Oct 17 2025 Paolo Andreetto <paolo.andreetto@pd.infn.it> - 2.6.0-1
