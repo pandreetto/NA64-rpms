@@ -1,8 +1,8 @@
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index c2e13a0..216d88a 100644
+index f61560d..2906f71 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -37,7 +37,6 @@ else()
+@@ -26,7 +26,6 @@ else()
    find_package(Geant4 REQUIRED)
  endif()
  
@@ -10,7 +10,7 @@ index c2e13a0..216d88a 100644
  list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/modules_cmake_standalone)
  
  #----------------------------------------------------------------------------
-@@ -78,5 +77,5 @@ if(APPLE)
+@@ -67,5 +66,5 @@ if(APPLE)
  endif(APPLE)
  
  #---Install build products---------------------------------------------------
