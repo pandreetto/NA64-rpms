@@ -1,12 +1,9 @@
 %global debug_package %{nil}
 %undefine _disable_source_fetch
 
-#
-# This is a temporary package, no reference provided
-#
-%global _pver 1.0.0
+%global _pver 1.0.1
 
-%global _sbuilddir %{_builddir}/%{name}-%{version}/simulation
+%global _sbuilddir %{_builddir}/%{name}-%{version}/geant4/simulation
 %global _cbuilddir %{_builddir}/%{name}-%{version}/build
 
 %global cmake_na64g4_dir %{_libdir}/cmake/NA64geant4
@@ -26,28 +23,29 @@ BuildRequires: root
 BuildRequires: na64-dmg4-devel
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 AutoReqProv: yes
-Source0: https://nexus.pd.infn.it/artifacts/repository/misc/na64-geant4-lib-%{version}.tar.gz
-Source1: na64-geant4-lib-CMakeLists.txt
-Source2: na64-geant4-lib-git-version.cc
-Source3: NA64geant4Config.cmake
-Source4: NA64geant4ConfigVersion.cmake.in
+Source0: na64-geant4-lib-CMakeLists.txt
+Source1: na64-geant4-lib-git-version.cc
+Source2: NA64geant4Config.cmake
+Source3: NA64geant4ConfigVersion.cmake.in
 
 %description
 Simulation library for NA64 project
 
 %prep
-%setup -c
+rm -rf %{_builddir}/%{name}-%{version}
+git clone https://gitlab.cern.ch/P348/na64-simulation.git %{_builddir}/%{name}-%{version}
+
 rm -rf %{buildroot}
 mkdir -p %{buildroot}
-cp %{SOURCE1} %{_sbuilddir}/CMakeLists.txt
-cp %{SOURCE2} %{_sbuilddir}/src/Utils/git_version.cc
+cp %{SOURCE0} %{_sbuilddir}/CMakeLists.txt
+cp %{SOURCE1} %{_sbuilddir}/src/Utils/git_version.cc
 
 %build
 mkdir %{_cbuilddir}
 cd %{_cbuilddir}
 cmake -DCMAKE_INSTALL_PREFIX=%{buildroot}%{_prefix} \
       -DCMAKE_BUILD_TYPE=RelWithDebInfo \
-      -DCMAKE_CXX_STANDARD=17 \
+      -DCMAKE_CXX_STANDARD=20 \
       -DDMG4_ROOT_DIR=%{_prefix} \
       %{_sbuilddir}
 make %{?_smp_mflags}
@@ -57,13 +55,13 @@ cd %{_cbuilddir}
 make install
 
 mkdir -p %{buildroot}%{cmake_na64g4_dir}
-cp %{SOURCE3} %{buildroot}%{cmake_na64g4_dir}
-# TODO missing versioning
-cp %{SOURCE4} %{buildroot}%{cmake_na64g4_dir}/NA64geant4ConfigVersion.cmake
+cp %{SOURCE2} %{buildroot}%{cmake_na64g4_dir}
+cp %{SOURCE3} %{buildroot}%{cmake_na64g4_dir}/NA64geant4ConfigVersion.cmake
+sed -i -e 's|1.0.0|%{_pver}|g' %{buildroot}%{cmake_na64g4_dir}/NA64geant4ConfigVersion.cmake
 
 %clean
 rm -rf %{buildroot}
-rm -f %{SOURCE0}
+rm -rf %{_builddir}/%{name}-%{version}
 
 %files
 %defattr(-,root,root)
@@ -89,6 +87,8 @@ Simulation library for NA64 project (development files).
 %{cmake_na64g4_dir}/*.cmake
 
 %changelog
+* Wed Jul 01 2026 Paolo Andreetto <paolo.andreetto@pd.infn.it> - 1.0.1-1
+- Second release for AlmaLinux
 * Fri Oct 17 2025 Paolo Andreetto <paolo.andreetto@pd.infn.it> - 1.0.0-1
 - First release for AlmaLinux
 
