@@ -2,6 +2,7 @@
 %undefine _disable_source_fetch
 
 %global _pver 1.0.1
+%global _tagver a321e0ae1ee136d3b3170641c9aa124db917f4f8
 
 %global _sbuilddir %{_builddir}/%{name}-%{version}/geant4/simulation
 %global _cbuilddir %{_builddir}/%{name}-%{version}/build
@@ -24,9 +25,8 @@ BuildRequires: na64-dmg4-devel
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 AutoReqProv: yes
 Source0: na64-geant4-lib-CMakeLists.txt
-Source1: na64-geant4-lib-git-version.cc
-Source2: NA64geant4Config.cmake
-Source3: NA64geant4ConfigVersion.cmake.in
+Source1: NA64geant4Config.cmake
+Source2: NA64geant4ConfigVersion.cmake.in
 
 %description
 Simulation library for NA64 project
@@ -34,11 +34,22 @@ Simulation library for NA64 project
 %prep
 rm -rf %{_builddir}/%{name}-%{version}
 git clone https://gitlab.cern.ch/P348/na64-simulation.git %{_builddir}/%{name}-%{version}
+cd %{_builddir}/%{name}-%{version}
+git checkout %{_tagver}
 
 rm -rf %{buildroot}
 mkdir -p %{buildroot}
 cp %{SOURCE0} %{_sbuilddir}/CMakeLists.txt
-cp %{SOURCE1} %{_sbuilddir}/src/Utils/git_version.cc
+
+# workaround for versioning; TODO fix inside CMake
+cp %{_sbuilddir}/src/Utils/git_version.cc.in %{_sbuilddir}/src/Utils/git_version.cc
+sed -i -e 's|@GIT_HASH@||g' \
+       -e 's|@GIT_IS_DIRTY@|false|g' %{_sbuilddir}/src/Utils/git_version.cc
+cp %{_sbuilddir}/src/Utils/dmg4_version.cc.in %{_sbuilddir}/src/Utils/dmg4_version.cc
+sed -i -e 's|@DMG4_VERSION@|3.0.0|g' %{_sbuilddir}/src/Utils/dmg4_version.cc
+cp %{_sbuilddir}/src/Utils/geant4_version.cc.in %{_sbuilddir}/src/Utils/geant4_version.cc
+sed -i -e 's|@Geant4_VERSION@|11.3.0|g' \
+       -e 's|@Geant4_DIR@|/usr|g' %{_sbuilddir}/src/Utils/geant4_version.cc
 
 %build
 mkdir %{_cbuilddir}
@@ -55,8 +66,8 @@ cd %{_cbuilddir}
 make install
 
 mkdir -p %{buildroot}%{cmake_na64g4_dir}
-cp %{SOURCE2} %{buildroot}%{cmake_na64g4_dir}
-cp %{SOURCE3} %{buildroot}%{cmake_na64g4_dir}/NA64geant4ConfigVersion.cmake
+cp %{SOURCE1} %{buildroot}%{cmake_na64g4_dir}
+cp %{SOURCE2} %{buildroot}%{cmake_na64g4_dir}/NA64geant4ConfigVersion.cmake
 sed -i -e 's|1.0.0|%{_pver}|g' %{buildroot}%{cmake_na64g4_dir}/NA64geant4ConfigVersion.cmake
 
 %clean
