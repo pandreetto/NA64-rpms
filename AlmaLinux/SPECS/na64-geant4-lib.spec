@@ -27,6 +27,7 @@ AutoReqProv: yes
 Source0: na64-geant4-lib-CMakeLists.txt
 Source1: NA64geant4Config.cmake
 Source2: NA64geant4ConfigVersion.cmake.in
+Patch0: na64-geant4-lib-detext.patch
 
 %description
 Simulation library for NA64 project
@@ -36,6 +37,8 @@ rm -rf %{_builddir}/%{name}-%{version}
 git clone https://gitlab.cern.ch/P348/na64-simulation.git %{_builddir}/%{name}-%{version}
 cd %{_builddir}/%{name}-%{version}
 git checkout %{_tagver}
+
+patch %{_sbuilddir}/include/NA64DetectorConstruction.hh %{PATCH0}
 
 rm -rf %{buildroot}
 mkdir -p %{buildroot}
