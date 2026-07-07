@@ -1,0 +1,15 @@
+diff --git a/geant4/simulation/src/Core/NA64DetectorConstruction.cc b/geant4/simulation/src/Core/NA64DetectorConstruction.cc
+index bf103c69..8b188c55 100644
+--- a/geant4/simulation/src/Core/NA64DetectorConstruction.cc
++++ b/geant4/simulation/src/Core/NA64DetectorConstruction.cc
+@@ -195,8 +195,9 @@ DetectorConstruction::DetectorConstruction(GeometryVersion version)
+       subdetVector.add(new NA64::GEMConstruction(this, kMuInvis2024));
+       subdetVector.add(new NA64::StrawConstruction(this, kMuInvis2024));
+     }
++
++    if(subdetVector.empty()) { G4cout << "No subdetectors are built, exiting" << G4endl; exit(1);}
+   }
+-  if(subdetVector.empty()) { G4cout << "No subdetectors are built, exiting" << G4endl; exit(1);}
+ 
+   UserPreInitialization();
+ 

@@ -1,0 +1,17 @@
+diff --git a/geant4/simulation/src/Core/NA64DetectorConstructionUserCode.cc b/geant4/simulation/src/Core/NA64DetectorConstructionUserCode.cc
+index 8e24091f..7b0a79ba 100644
+--- a/geant4/simulation/src/Core/NA64DetectorConstructionUserCode.cc
++++ b/geant4/simulation/src/Core/NA64DetectorConstructionUserCode.cc
+@@ -6,10 +6,11 @@
+ 
+ namespace NA64 {
+ 
++bool DetectorConstruction::custom_detector_default = false;
+ 
+ G4bool DetectorConstruction::UserConstructDetector()
+ {
+-  return false; // Change to true if the detector is constructed here
++  return custom_detector_default; // Change to true if the detector is constructed here
+ }
+ 
+ 

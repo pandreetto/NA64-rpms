@@ -1,19 +1,13 @@
 diff --git a/geant4/simulation/include/NA64DetectorConstruction.hh b/geant4/simulation/include/NA64DetectorConstruction.hh
-index 51f3942a..2cc6bcc9 100644
+index 51f3942a..35663f70 100644
 --- a/geant4/simulation/include/NA64DetectorConstruction.hh
 +++ b/geant4/simulation/include/NA64DetectorConstruction.hh
-@@ -53,11 +53,11 @@ class DetectorConstruction : public G4VUserDetectorConstruction
-     const SubdetCollection & GetSubdetVector() const {return subdetVector;}
-     SubdetCollection & GetSubdetVector() {return subdetVector;}
+@@ -198,6 +198,8 @@ class DetectorConstruction : public G4VUserDetectorConstruction
+     void SetEventsTrig(G4int n) {NEventsTrig=n;}
+     G4int GetEventsTrig() const {return NEventsTrig;}
  
--    G4bool UserConstructDetector();
-+    virtual G4bool UserConstructDetector();
++    static bool custom_detector_default;
++
+   private:
  
--    void UserPreInitialization();
-+    virtual void UserPreInitialization();
- 
--    void UserPostConstructIt();
-+    virtual void UserPostConstructIt();
-     void CheckParametersConsistency();
- 
-     G4double BentBeamX(G4double Z) {return (-289.35 - Z*0.0222)/(GeometryMomentum/100.);}
+     void DefineMaterials();

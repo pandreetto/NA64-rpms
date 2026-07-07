@@ -28,6 +28,8 @@ Source0: na64-geant4-lib-CMakeLists.txt
 Source1: NA64geant4Config.cmake
 Source2: NA64geant4ConfigVersion.cmake.in
 Patch0: na64-geant4-lib-detext.patch
+Patch1: na64-geant4-lib-detext2.patch
+Patch2: na64-geant4-lib-detext3.patch
 
 %description
 Simulation library for NA64 project
@@ -39,6 +41,8 @@ cd %{_builddir}/%{name}-%{version}
 git checkout %{_tagver}
 
 patch %{_sbuilddir}/include/NA64DetectorConstruction.hh %{PATCH0}
+patch %{_sbuilddir}/src/Core/NA64DetectorConstruction.cc %{PATCH1}
+patch %{_sbuilddir}/src/Core/NA64DetectorConstructionUserCode.cc %{PATCH2}
 
 rm -rf %{buildroot}
 mkdir -p %{buildroot}
