@@ -36,6 +36,8 @@ BuildRequires: clhep-devel
 %if %{with OpenGL}
 BuildRequires: libX11-devel
 BuildRequires: libXmu-devel
+BuildRequires: mesa-libGL-devel
+BuildRequires: mesa-libGLU-devel
 %endif
 Requires: python3
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -132,6 +134,8 @@ Requires: clhep-devel
 %if %{with OpenGL}
 Requires: libX11-devel
 Requires: libXmu-devel
+Requires: mesa-libGL-devel
+Requires: mesa-libGLU-devel
 %endif
 
 %description devel
