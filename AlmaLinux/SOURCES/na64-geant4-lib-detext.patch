@@ -1,13 +1,15 @@
 diff --git a/geant4/simulation/include/NA64DetectorConstruction.hh b/geant4/simulation/include/NA64DetectorConstruction.hh
-index 51f3942a..35663f70 100644
+index 51f3942a..98daf4ca 100644
 --- a/geant4/simulation/include/NA64DetectorConstruction.hh
 +++ b/geant4/simulation/include/NA64DetectorConstruction.hh
-@@ -198,6 +198,8 @@ class DetectorConstruction : public G4VUserDetectorConstruction
+@@ -198,7 +198,9 @@ class DetectorConstruction : public G4VUserDetectorConstruction
      void SetEventsTrig(G4int n) {NEventsTrig=n;}
      G4int GetEventsTrig() const {return NEventsTrig;}
  
+-  private:
 +    static bool custom_detector_default;
 +
-   private:
++  protected:
  
      void DefineMaterials();
+ 
