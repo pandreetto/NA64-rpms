@@ -1,0 +1,25 @@
+diff --git a/geant4/simulation/src/Core/NA64Event.cc b/geant4/simulation/src/Core/NA64Event.cc
+index 7a87fa00..d85fff48 100644
+--- a/geant4/simulation/src/Core/NA64Event.cc
++++ b/geant4/simulation/src/Core/NA64Event.cc
+@@ -424,9 +424,9 @@ void NA64Event::FillStraw(NA64StrawHitsCollection* StrawHits) {
+ }
+ 
+ 
+-void NA64Event::Write(ofstream &fout) {
++void NA64Event::Write(ofstream &fout, bool notag) {
+ 
+-  fout << "EVENT" << endl;
++  if (!notag) fout << "EVENT" << endl;
+   fout << IEvent << " " << IEventOut << " " << myDetector->GetAWeight() << endl;
+ 
+   //Event seeds
+@@ -696,7 +696,7 @@ void NA64Event::Write(ofstream &fout) {
+   StrawHitVector.clear();
+ 
+   // End of event tag
+-  fout << "ENDEVENT" << endl;
++  if (!notag) fout << "ENDEVENT" << endl;
+ 
+ }
+ 

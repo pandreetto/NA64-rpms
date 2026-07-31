@@ -1,0 +1,13 @@
+diff --git a/geant4/simulation/include/NA64Event.hh b/geant4/simulation/include/NA64Event.hh
+index cdfea69b..3b366a51 100644
+--- a/geant4/simulation/include/NA64Event.hh
++++ b/geant4/simulation/include/NA64Event.hh
+@@ -110,7 +110,7 @@ public:
+     NA64Event(DetectorConstruction *myDC);
+     virtual ~NA64Event();
+ 
+-    void Write(std::ofstream &of);
++    void Write(std::ofstream &of, bool notag = false);
+     void Clear();
+     void UserAnalysis(void);
+ 
