@@ -1,8 +1,8 @@
 %global debug_package %{nil}
 %undefine _disable_source_fetch
 
-%global _pver 1.0.1
-%global _tagver a321e0ae1ee136d3b3170641c9aa124db917f4f8
+%global _pver 1.0.2
+%global _tagver 84f0aba6fe8c4573e8a8e4c80a39c1b8dc4a1dec
 
 %global _sbuilddir %{_builddir}/%{name}-%{version}/geant4/simulation
 %global _cbuilddir %{_builddir}/%{name}-%{version}/build
@@ -32,6 +32,7 @@ Patch1: na64-geant4-lib-detext2.patch
 Patch2: na64-geant4-lib-detext3.patch
 Patch3: na64-geant4-lib-detext4.patch
 Patch4: na64-geant4-lib-detext5.patch
+Patch5: na64-geant4-lib-magmapdir.patch
 
 %description
 Simulation library for NA64 project
@@ -47,6 +48,7 @@ patch %{_sbuilddir}/src/Core/NA64DetectorConstruction.cc %{PATCH1}
 patch %{_sbuilddir}/src/Core/NA64DetectorConstructionUserCode.cc %{PATCH2}
 patch %{_sbuilddir}/include/NA64Event.hh %{PATCH3}
 patch %{_sbuilddir}/src/Core/NA64Event.cc %{PATCH4}
+patch %{_sbuilddir}/src/Core/NA64MagnetConstruction.cc %{PATCH5}
 
 rm -rf %{buildroot}
 mkdir -p %{buildroot}
@@ -81,6 +83,9 @@ cp %{SOURCE1} %{buildroot}%{cmake_na64g4_dir}
 cp %{SOURCE2} %{buildroot}%{cmake_na64g4_dir}/NA64geant4ConfigVersion.cmake
 sed -i -e 's|1.0.0|%{_pver}|g' %{buildroot}%{cmake_na64g4_dir}/NA64geant4ConfigVersion.cmake
 
+mkdir -p %{buildroot}%{_datadir}/na64-geant4-lib/DATA
+cp %{_sbuilddir}/DATA/*.map %{buildroot}%{_datadir}/na64-geant4-lib/DATA
+
 %clean
 rm -rf %{buildroot}
 rm -rf %{_builddir}/%{name}-%{version}
@@ -88,7 +93,9 @@ rm -rf %{_builddir}/%{name}-%{version}
 %files
 %defattr(-,root,root)
 %{_libdir}/*.so
-
+%dir %{_datadir}/na64-geant4-lib
+%dir %{_datadir}/na64-geant4-lib/DATA
+%{_datadir}/na64-geant4-lib/DATA/*.map
 
 %package devel
 Summary: Simulation library for NA64 project (development files)
@@ -109,6 +116,8 @@ Simulation library for NA64 project (development files).
 %{cmake_na64g4_dir}/*.cmake
 
 %changelog
+* Mon Aug 24 2026 Paolo Andreetto <paolo.andreetto@pd.infn.it> - 1.0.2-1
+- New release for AlmaLinux
 * Wed Jul 01 2026 Paolo Andreetto <paolo.andreetto@pd.infn.it> - 1.0.1-1
 - Second release for AlmaLinux
 * Fri Oct 17 2025 Paolo Andreetto <paolo.andreetto@pd.infn.it> - 1.0.0-1

@@ -1,0 +1,31 @@
+diff --git a/geant4/simulation/src/Core/NA64MagnetConstruction.cc b/geant4/simulation/src/Core/NA64MagnetConstruction.cc
+index 3b3a54bd..de3e6c8b 100644
+--- a/geant4/simulation/src/Core/NA64MagnetConstruction.cc
++++ b/geant4/simulation/src/Core/NA64MagnetConstruction.cc
+@@ -228,7 +228,7 @@ void MagnetConstruction::ConstructIt()
+     G4AffineTransform worldToMagnetMBP2 = localToWorld(physiMagnetSpectrometerMBP2).Inverse();
+     worldToMagnetMBP2 *= localToWorld(physiMagnetMBP2).Inverse();
+ 
+-    const G4String fieldpath = "./../../DATA/";
++    const G4String fieldpath = "/usr/share/na64-geant4-lib/DATA/";
+     
+     double field_factor_MS1, field_factor_MS2 = 0;
+ 
+@@ -576,7 +576,7 @@ void MagnetConstruction::ConstructIt()
+   // The following is specific to the electron 2023 geometry, where the magnetic fields are derived from specific maps
+   else if(IGeometryVersion == kInvis2023 || IGeometryVersion == kInvisPosi2023 || IGeometryVersion == kInvis2024) {
+     // Tabulated field maps for electron 2023 geometry
+-    const G4String fieldpath = "./../../DATA/";
++    const G4String fieldpath = "/usr/share/na64-geant4-lib/DATA/";
+ 
+     fMagneticField_BEND21a = new TabulatedElementField3D(
+         fieldpath + "FM_MS1_MBP_850A.map", "Bend", "Bend21a", 1.0*tesla,
+@@ -604,7 +604,7 @@ void MagnetConstruction::ConstructIt()
+   }
+   else if (IGeometryVersion == kTest) {
+     // Tabulated field maps for electron 2023 geometry with MBP volumes
+-    const G4String fieldpath = "./../../DATA/";
++    const G4String fieldpath = "/usr/share/na64-geant4-lib/DATA/";
+ 
+     // Compose world → spectrometer box → magnet local transforms for tabulated fields
+     G4AffineTransform worldToBox = localToWorld(physiMagnetSpectrometerBEND21).Inverse();
