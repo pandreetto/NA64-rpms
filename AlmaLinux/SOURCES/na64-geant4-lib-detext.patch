@@ -1,8 +1,8 @@
 diff --git a/geant4/simulation/include/NA64DetectorConstruction.hh b/geant4/simulation/include/NA64DetectorConstruction.hh
-index 51f3942a..19bf610a 100644
+index e098e956..5f08ee08 100644
 --- a/geant4/simulation/include/NA64DetectorConstruction.hh
 +++ b/geant4/simulation/include/NA64DetectorConstruction.hh
-@@ -198,9 +198,14 @@ class DetectorConstruction : public G4VUserDetectorConstruction
+@@ -206,9 +206,14 @@ class DetectorConstruction : public G4VUserDetectorConstruction
      void SetEventsTrig(G4int n) {NEventsTrig=n;}
      G4int GetEventsTrig() const {return NEventsTrig;}
  

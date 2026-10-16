@@ -1,8 +1,8 @@
 %global debug_package %{nil}
 %undefine _disable_source_fetch
 
-%global _pver 1.0.2
-%global _tagver 84f0aba6fe8c4573e8a8e4c80a39c1b8dc4a1dec
+%global _pver 1.0.3
+%global _tagver 0ab343918d26d8e7e09e01c5a378ef2048c694ec
 
 %global _sbuilddir %{_builddir}/%{name}-%{version}/geant4/simulation
 %global _cbuilddir %{_builddir}/%{name}-%{version}/build
@@ -116,6 +116,8 @@ Simulation library for NA64 project (development files).
 %{cmake_na64g4_dir}/*.cmake
 
 %changelog
+* Wed Oct 14 2026 Paolo Andreetto <paolo.andreetto@pd.infn.it> - 1.0.3-1
+- New changes in geometries
 * Mon Aug 24 2026 Paolo Andreetto <paolo.andreetto@pd.infn.it> - 1.0.2-1
 - New release for AlmaLinux
 * Wed Jul 01 2026 Paolo Andreetto <paolo.andreetto@pd.infn.it> - 1.0.1-1

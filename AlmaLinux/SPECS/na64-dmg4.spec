@@ -12,7 +12,7 @@
 Summary: Simulation of Dark Matter production in the electron, positron and muon beams
 Name: na64-dmg4
 Version: %{_pver}
-Release: 1.na64%{?dist}
+Release: 2.na64%{?dist}
 License: GPL v.3
 Vendor: CERN
 URL: https://gitlab.cern.ch/P348/DMG4
@@ -87,6 +87,8 @@ Simulation of Dark Matter production in the electron, positron and muon beams (d
 %{cmake_dmg4_dir}/*.cmake
 
 %changelog
+* Wed Oct 14 2026 Paolo Andreetto <paolo.andreetto@pd.infn.it> - 3.0.0-2
+- Minor changes
 * Wed Jul 01 2026 Paolo Andreetto <paolo.andreetto@pd.infn.it> - 3.0.0-1
 - First release for AlmaLinux
 * Fri Oct 17 2025 Paolo Andreetto <paolo.andreetto@pd.infn.it> - 2.6.0-1
