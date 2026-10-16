@@ -1,8 +1,8 @@
 %global debug_package %{nil}
 %undefine _disable_source_fetch
 
-%global _pver 0.0.3
-%global _tagver 7846a45a75b34c405c24a58c9a53fd428fe22502
+%global _pver 0.0.4
+%global _tagver 6d7e3bcb717958475654562f67fa67e9bce74719
 
 %global _cbuilddir %{_builddir}/%{name}-%{version}/build
 %global _sbuilddir %{_builddir}/%{name}-%{version}/na64-crilin-simulation-%{_tagver}
@@ -54,6 +54,8 @@ rm -f %{SOURCE0}
 %{_bindir}/mkgeant4
 
 %changelog
+* Fri Oct 16 2026 Paolo Andreetto <paolo.andreetto@pd.infn.it> - 0.0.4-1
+- Multi geometry support
 * Wed Oct 07 2026 Paolo Andreetto <paolo.andreetto@pd.infn.it> - 0.0.3-1
 - Minor changes
 * Fri Aug 28 2026 Paolo Andreetto <paolo.andreetto@pd.infn.it> - 0.0.2-1
