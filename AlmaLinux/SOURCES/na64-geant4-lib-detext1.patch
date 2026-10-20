@@ -1,0 +1,12 @@
+diff --git a/geant4/simulation/include/NA64SubdetConstruction.hh b/geant4/simulation/include/NA64SubdetConstruction.hh
+index 197cbe1f..44e1abec 100644
+--- a/geant4/simulation/include/NA64SubdetConstruction.hh
++++ b/geant4/simulation/include/NA64SubdetConstruction.hh
+@@ -30,6 +30,7 @@ class SubdetConstruction    //  NA64 subdetector base class
+     void SetSubdetName(G4String subdetNameIn) {subdetName = subdetNameIn;}
+ 
+     void SetSubdetOff() {ISubdetOff = true;}
++    void SetSubdetOn() { ISubdetOff = false; }
+     G4bool GetSubdetOff() {return ISubdetOff;}
+     G4bool SubdetConstructed() {return ISubdetConstructed;}
+     virtual G4bool IsSensitive() const {return true;}

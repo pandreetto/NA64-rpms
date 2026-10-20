@@ -1,8 +1,8 @@
 %global debug_package %{nil}
 %undefine _disable_source_fetch
 
-%global _pver 0.0.4
-%global _tagver 6d7e3bcb717958475654562f67fa67e9bce74719
+%global _pver 0.0.6
+%global _tagver 8bb356dfbd15f36c42a32c8c791c5d129bfbed79
 
 %global _cbuilddir %{_builddir}/%{name}-%{version}/build
 %global _sbuilddir %{_builddir}/%{name}-%{version}/na64-crilin-simulation-%{_tagver}
@@ -54,6 +54,10 @@ rm -f %{SOURCE0}
 %{_bindir}/mkgeant4
 
 %changelog
+* Tue Oct 20 2026 Paolo Andreetto <paolo.andreetto@pd.infn.it> - 0.0.6-1
+- ECal in the geometry
+* Mon Oct 19 2026 Paolo Andreetto <paolo.andreetto@pd.infn.it> - 0.0.5-1
+- Default position for crilin
 * Fri Oct 16 2026 Paolo Andreetto <paolo.andreetto@pd.infn.it> - 0.0.4-1
 - Multi geometry support
 * Wed Oct 07 2026 Paolo Andreetto <paolo.andreetto@pd.infn.it> - 0.0.3-1

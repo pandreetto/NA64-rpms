@@ -1,7 +1,7 @@
 %global debug_package %{nil}
 %undefine _disable_source_fetch
 
-%global _pver 1.0.3
+%global _pver 1.0.4
 %global _tagver 0ab343918d26d8e7e09e01c5a378ef2048c694ec
 
 %global _sbuilddir %{_builddir}/%{name}-%{version}/geant4/simulation
@@ -28,11 +28,12 @@ Source0: na64-geant4-lib-CMakeLists.txt
 Source1: NA64geant4Config.cmake
 Source2: NA64geant4ConfigVersion.cmake.in
 Patch0: na64-geant4-lib-detext.patch
-Patch1: na64-geant4-lib-detext2.patch
-Patch2: na64-geant4-lib-detext3.patch
-Patch3: na64-geant4-lib-detext4.patch
-Patch4: na64-geant4-lib-detext5.patch
-Patch5: na64-geant4-lib-magmapdir.patch
+Patch1: na64-geant4-lib-detext1.patch
+Patch2: na64-geant4-lib-detext2.patch
+Patch3: na64-geant4-lib-detext3.patch
+Patch4: na64-geant4-lib-detext4.patch
+Patch5: na64-geant4-lib-detext5.patch
+Patch6: na64-geant4-lib-magmapdir.patch
 
 %description
 Simulation library for NA64 project
@@ -44,11 +45,12 @@ cd %{_builddir}/%{name}-%{version}
 git checkout %{_tagver}
 
 patch %{_sbuilddir}/include/NA64DetectorConstruction.hh %{PATCH0}
-patch %{_sbuilddir}/src/Core/NA64DetectorConstruction.cc %{PATCH1}
-patch %{_sbuilddir}/src/Core/NA64DetectorConstructionUserCode.cc %{PATCH2}
-patch %{_sbuilddir}/include/NA64Event.hh %{PATCH3}
-patch %{_sbuilddir}/src/Core/NA64Event.cc %{PATCH4}
-patch %{_sbuilddir}/src/Core/NA64MagnetConstruction.cc %{PATCH5}
+patch %{_sbuilddir}/include/NA64SubdetConstruction.hh %{PATCH1}
+patch %{_sbuilddir}/src/Core/NA64DetectorConstruction.cc %{PATCH2}
+patch %{_sbuilddir}/src/Core/NA64DetectorConstructionUserCode.cc %{PATCH3}
+patch %{_sbuilddir}/include/NA64Event.hh %{PATCH4}
+patch %{_sbuilddir}/src/Core/NA64Event.cc %{PATCH5}
+patch %{_sbuilddir}/src/Core/NA64MagnetConstruction.cc %{PATCH6}
 
 rm -rf %{buildroot}
 mkdir -p %{buildroot}
@@ -116,6 +118,8 @@ Simulation library for NA64 project (development files).
 %{cmake_na64g4_dir}/*.cmake
 
 %changelog
+* Tue Oct 20 2026 Paolo Andreetto <paolo.andreetto@pd.infn.it> - 1.0.4-1
+- Minor changes
 * Wed Oct 14 2026 Paolo Andreetto <paolo.andreetto@pd.infn.it> - 1.0.3-1
 - New changes in geometries
 * Mon Aug 24 2026 Paolo Andreetto <paolo.andreetto@pd.infn.it> - 1.0.2-1
