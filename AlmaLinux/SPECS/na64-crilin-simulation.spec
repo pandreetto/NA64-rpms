@@ -1,11 +1,11 @@
 %global debug_package %{nil}
 %undefine _disable_source_fetch
 
-%global _pver 0.0.6
-%global _tagver 8bb356dfbd15f36c42a32c8c791c5d129bfbed79
+%global _pver 0.0.7
+%global _tagver 36366eb3841f86600474308bf16741718dcea1c1
 
 %global _cbuilddir %{_builddir}/%{name}-%{version}/build
-%global _sbuilddir %{_builddir}/%{name}-%{version}/na64-crilin-simulation-%{_tagver}
+%global _sbuilddir %{_builddir}/%{name}-%{version}
 
 Summary: Geant4 simulator for CRILIN detector
 Name: na64-crilin-simulation
@@ -27,7 +27,11 @@ Source0: https://gitlab.cern.ch/paandree/na64-crilin-simulation/-/archive/%{_tag
 Geant4 simulator for CRILIN detector.
 
 %prep
-%setup -c
+rm -rf %{_builddir}/%{name}-%{version}
+git clone https://gitlab.cern.ch/paandree/na64-crilin-simulation.git %{_builddir}/%{name}-%{version}
+cd %{_builddir}/%{name}-%{version}
+git checkout %{_tagver}
+
 rm -rf %{buildroot}
 mkdir -p %{buildroot}
 
@@ -54,6 +58,8 @@ rm -f %{SOURCE0}
 %{_bindir}/mkgeant4
 
 %changelog
+* Thu Oct 22 2026 Paolo Andreetto <paolo.andreetto@pd.infn.it> - 0.0.7-1
+- Fixed bug disabling crilin
 * Tue Oct 20 2026 Paolo Andreetto <paolo.andreetto@pd.infn.it> - 0.0.6-1
 - ECal in the geometry
 * Mon Oct 19 2026 Paolo Andreetto <paolo.andreetto@pd.infn.it> - 0.0.5-1
