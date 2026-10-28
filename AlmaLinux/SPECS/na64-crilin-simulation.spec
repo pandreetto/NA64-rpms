@@ -1,8 +1,8 @@
 %global debug_package %{nil}
 %undefine _disable_source_fetch
 
-%global _pver 0.0.7
-%global _tagver 36366eb3841f86600474308bf16741718dcea1c1
+%global _pver 0.0.8
+%global _tagver 263f0f16abb341798e2f4490b61ef0d63c9f2303
 
 %global _cbuilddir %{_builddir}/%{name}-%{version}/build
 %global _sbuilddir %{_builddir}/%{name}-%{version}
@@ -58,6 +58,8 @@ rm -f %{SOURCE0}
 %{_bindir}/mkgeant4
 
 %changelog
+* Wed Oct 28 2026 Paolo Andreetto <paolo.andreetto@pd.infn.it> - 0.0.8-1
+- Default values for trigger thresholds
 * Thu Oct 22 2026 Paolo Andreetto <paolo.andreetto@pd.infn.it> - 0.0.7-1
 - Fixed bug disabling crilin
 * Tue Oct 20 2026 Paolo Andreetto <paolo.andreetto@pd.infn.it> - 0.0.6-1
