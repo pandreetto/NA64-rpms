@@ -1,8 +1,8 @@
 %global debug_package %{nil}
 %undefine _disable_source_fetch
 
-%global _pver 1.0.4
-%global _tagver 0ab343918d26d8e7e09e01c5a378ef2048c694ec
+%global _pver 1.0.6
+%global _tagver b3f41829e1d6aeb026c77e22ae3e8cf3ee365d32
 
 %global _sbuilddir %{_builddir}/%{name}-%{version}/geant4/simulation
 %global _cbuilddir %{_builddir}/%{name}-%{version}/build
@@ -15,7 +15,7 @@ Version: %{_pver}
 Release: 1.na64%{?dist}
 License: GPL v.3
 Vendor: CERN
-URL: https://gitlab.cern.ch/P348/DMG4
+URL: https://gitlab.cern.ch/P348/na64-simulation
 Group: Development/Libraries
 BuildArch: %{_arch}
 BuildRequires: cmake
@@ -27,13 +27,7 @@ AutoReqProv: yes
 Source0: na64-geant4-lib-CMakeLists.txt
 Source1: NA64geant4Config.cmake
 Source2: NA64geant4ConfigVersion.cmake.in
-Patch0: na64-geant4-lib-detext.patch
-Patch1: na64-geant4-lib-detext1.patch
-Patch2: na64-geant4-lib-detext2.patch
-Patch3: na64-geant4-lib-detext3.patch
-Patch4: na64-geant4-lib-detext4.patch
-Patch5: na64-geant4-lib-detext5.patch
-Patch6: na64-geant4-lib-magmapdir.patch
+Patch0: na64-geant4-lib-magmapdir.patch
 
 %description
 Simulation library for NA64 project
@@ -44,13 +38,7 @@ git clone https://gitlab.cern.ch/P348/na64-simulation.git %{_builddir}/%{name}-%
 cd %{_builddir}/%{name}-%{version}
 git checkout %{_tagver}
 
-patch %{_sbuilddir}/include/NA64DetectorConstruction.hh %{PATCH0}
-patch %{_sbuilddir}/include/NA64SubdetConstruction.hh %{PATCH1}
-patch %{_sbuilddir}/src/Core/NA64DetectorConstruction.cc %{PATCH2}
-patch %{_sbuilddir}/src/Core/NA64DetectorConstructionUserCode.cc %{PATCH3}
-patch %{_sbuilddir}/include/NA64Event.hh %{PATCH4}
-patch %{_sbuilddir}/src/Core/NA64Event.cc %{PATCH5}
-patch %{_sbuilddir}/src/Core/NA64MagnetConstruction.cc %{PATCH6}
+patch %{_sbuilddir}/src/Core/NA64MagnetConstruction.cc %{PATCH0}
 
 rm -rf %{buildroot}
 mkdir -p %{buildroot}
@@ -72,7 +60,6 @@ cd %{_cbuilddir}
 cmake -DCMAKE_INSTALL_PREFIX=%{buildroot}%{_prefix} \
       -DCMAKE_BUILD_TYPE=RelWithDebInfo \
       -DCMAKE_CXX_STANDARD=20 \
-      -DDMG4_ROOT_DIR=%{_prefix} \
       %{_sbuilddir}
 make %{?_smp_mflags}
 
@@ -118,6 +105,10 @@ Simulation library for NA64 project (development files).
 %{cmake_na64g4_dir}/*.cmake
 
 %changelog
+* Wed Nov 04 2026 Paolo Andreetto <paolo.andreetto@pd.infn.it> - 1.0.6-1
+- New geometries available
+* Mon Nov 02 2026 Paolo Andreetto <paolo.andreetto@pd.infn.it> - 1.0.5-1
+- Minor changes
 * Tue Oct 20 2026 Paolo Andreetto <paolo.andreetto@pd.infn.it> - 1.0.4-1
 - Minor changes
 * Wed Oct 14 2026 Paolo Andreetto <paolo.andreetto@pd.infn.it> - 1.0.3-1
